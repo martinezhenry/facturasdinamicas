@@ -24,16 +24,19 @@ https://code.jquery.com/jquery-2.2.1.min.js
 
 .main {
     
-    background: gray;
+    background: rgba(125, 139, 160, 0.18);;
     min-height: 10px;
+    padding: 10px;
     
 }
 
 .hola, .span8
 {
    
-   border: 1px solid red;
+   border: 1px solid gray;
    border-radius:3px;
    margin: 5px;
    padding: 5px;
 }
+
+
