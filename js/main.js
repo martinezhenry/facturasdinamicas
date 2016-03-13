@@ -155,7 +155,7 @@ function putPedido() {
     pedido.handling = $('#entrega-txt').val();
     pedido.restocking = $('#repo-txt').val();
     pedido.total_sale = $('#total-txt').val();
-
+    
     var detalle = new Object();
     
     $('#products tbody tr').each(function(k,v) {
@@ -165,6 +165,8 @@ function putPedido() {
         detalle.descripcion = $(v).find("td").eq(2).html(),
         detalle.precio_unit = $(v).find("td").eq(3).html(),
         detalle.sub_total = $(v).find("td").eq(4).html();
+        
+        pedido.detalle = detalle;
         
     });
      detalle.razon = $('#razon-txt').val();
