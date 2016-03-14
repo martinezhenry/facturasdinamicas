@@ -32,4 +32,28 @@ else
     $data = array('success' => 'Form was submitted', 'formData' => $_POST);
 }
 
+
+if(isset($_GET['lg']))
+{  
+    
+    $error = false;
+    $files = array();
+
+    $uploaddir = 'files/';
+    foreach($_FILES as $file)
+    {
+        $info = new SplFileInfo($file['name']);
+        if(move_uploaded_file($file['tmp_name'], $uploaddir .basename('logo.'. $info->getExtension())))
+        {
+            $files[] = $uploaddir .$file['name'];
+        }
+        else
+        {
+            $error = true;
+        }
+    }
+    $data = ($error) ? array('error' => 'There was an error uploading your files') : array('files' => $files);
+}
+
+
 echo json_encode($data);

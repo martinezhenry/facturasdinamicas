@@ -49,8 +49,8 @@ function refreshProducts() {
                 var count=0;
                 var subTotal=0.0;
                 var total = 0.0;
-                var impuesto = parseInt($('#imp-txt').val());
-                var descuento = parseFloat($('#desc-txt').val());
+                var impuesto = parseInt($('#impuesto-txt').val());
+                var descuento = parseFloat($('#descuento-txt').val());
                 console.log(descuento);
                 console.log(impuesto);
                 var montoDescuento=0.0;
@@ -155,7 +155,7 @@ function putPedido() {
     pedido.handling = $('#entrega-txt').val();
     pedido.restocking = $('#repo-txt').val();
     pedido.total_sale = $('#total-txt').val();
-    
+    pedido.detalle = [];
     var detalle = new Object();
     
     $('#products tbody tr').each(function(k,v) {
@@ -166,40 +166,93 @@ function putPedido() {
         detalle.precio_unit = $(v).find("td").eq(3).html(),
         detalle.sub_total = $(v).find("td").eq(4).html();
         
-        pedido.detalle = detalle;
-        
+        (pedido.detalle).push(detalle);
+        detalle = new Object();
     });
-     detalle.razon = $('#razon-txt').val();
-      detalle.razon = $('#razon-txt').val();
-       detalle.razon = $('#razon-txt').val();
-        detalle.razon = $('#razon-txt').val();
-         detalle.razon = $('#razon-txt').val();
+   
     
-    pedido = JSON.stringify(pedido);
+    //pedido = JSON.stringify(pedido);
+    
+console.log(pedido);
     
      $.ajax({
         url: 'controller/pedidos.php',
-        data: {'method': 'putPedido', 'parameters' : {  } },
+        data: {'method': 'putPedido', 'parameters' : { 'pedido': pedido  } },
         method: 'post',
         dataType:'json',
         success: function(r){
             console.log(r);
             
-            if (r != false){
+            if (r != false && r.error == 'undefined'){
                 
-                var html = "";
-                
-                $.each(r, function( key, value ) {
-                    html += "<option value='"+value.id+"'>";
-                    html += value.razon;
-                    html += "</<option>";
-                    
-                  });
-                $('#emp-box').append(html);
+                $('#msg .modal-body').html('Pedido Creada.');
+                $('#msg').addClass('success');
+                $('#msg').modal('toggle');
+     
+            } else {
+                $('#msg .modal-body').html(r.error);
+                $('#msg').addClass('error');
+                $('#msg').modal('toggle');
             }
         }
     }).fail(function(r){
         $('#msg').html('Error getting companies');
+        console.log('error: ' + r);
+    });
+    
+}
+
+
+
+function callReport(){
+    
+    
+    
+}
+
+
+function uploadLogo(){
+    
+    var files = event.target.files;
+    console.log(files);
+    // Create a formdata object and add the files
+    var data = new FormData();
+    $.each(files, function(key, value)
+    {
+        data.append(key, value);
+    });
+    
+    console.log(data);
+    
+   
+    $.ajax({
+        url: 'uploadFile.php?lg',
+        type: 'POST',
+        data: data,
+        cache: false,
+        dataType: 'json',
+        processData: false, // Don't process the files
+        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+        success: function(data, textStatus, jqXHR)
+        {
+            if(typeof data.error === 'undefined')
+            {
+                // Success so call function to process the form
+                $('#file-logo').filestyle('clear');
+              //  refreshProducts();
+            }
+            else
+            {
+                // Handle errors here
+                console.log('ERRORS: ' + data.error);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            // Handle errors here
+            console.log('ERRORS: ' + textStatus);
+            // STOP LOADING SPINNER
+        }
     });
     
 }
@@ -219,7 +272,15 @@ $(document).ready(function(){
     
     $('#infile').change(loadFile);
     
+    $('#file-logo').change(uploadLogo);
+    
+    
+    
      $('#fec-box').datepicker({dateFormat: 'dd/mm/yy'});
+     
+     $('#generar-pedido').on('click', function(){
+        putPedido();
+    });
     
 });
 
