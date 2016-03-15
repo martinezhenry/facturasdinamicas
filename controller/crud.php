@@ -1,6 +1,6 @@
 <?php	
 	header('Content-Type: application/json');
-	include '../../common/general.php';
+	include '../common/general.php';
 	$obj_function = new coFunction();
 	$obj_bdmysql = new coBdmysql();
 	#$cod_usuario = $_SESSION["cod_usuario"];
@@ -8,7 +8,7 @@
     if( !isset($_POST['arguments']) ) { $aResult['error'] = 'NO SE ENVIO NINGUN ARGUMENTO DE LA FUNCION!'; }
     if( !isset($aResult['error']) ) {
 		switch($_POST['functionname']) {
-			case 'agregar_cliente': /* 0=>RIF, 1=>RAZON SOCIAL, 2=> DIRECCIÓN, 3=>TELEFONO */
+			case 'agregar_cliente': /* 0=>RIF, 1=>RAZON SOCIAL, 2=> DIRECCIï¿½N, 3=>TELEFONO */
 				if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 3) ) {
                    $aResult['error'] = 'ARGUMENTOS INCOMPLETOS!';
 				}else{
@@ -32,7 +32,7 @@
 									$aResult['error'] = "CLIENTE CREADO CON EXITO PERO, EL TELEFONO NO FUE AGREGADO";
 								}
 							}else{
-								$aResult['error'] = "CREACIÓN DE CLIENTE FALLIDA!";
+								$aResult['error'] = "CREACIï¿½N DE CLIENTE FALLIDA!";
 							}
 						}else{
 							$aResult['error'] = "CLIENTE EXISTENTE!";

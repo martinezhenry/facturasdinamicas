@@ -257,6 +257,47 @@ function uploadLogo(){
     
 }
 
+/**
+ * Comment
+ */
+function findCustomer() {
+    
+    var rif = $('#rif-txt').val();
+    var cliente = new Object();
+    console.log('rif: '+ rif);
+    cliente.rif = rif;
+    
+        $.ajax({
+        url: 'controller/crud.php',
+        data: {'functionname': 'buscar_cliente', 'arguments': cliente },
+        method: 'post',
+        dataType:'json',
+        success: function(r){
+            console.log(r);
+
+                
+                var html = "";
+                
+                 if(!('error' in r)){
+                
+                $('#msg .modal-body').html(r.result['TELEFONO']);
+                $('#msg').addClass('success');
+                $('#msg').modal('toggle');
+     
+            } else {
+                $('#msg .modal-body').html(r.error);
+                $('#msg').addClass('error');
+                $('#msg').modal('toggle');
+            }
+            
+        }
+    }).fail(function(r){
+        console.log('Error find customer:' + r);
+        $('#msg').html('Error getting companies');
+    });
+    
+}
+
 
 $(document).ready(function(){
 
@@ -267,6 +308,13 @@ $(document).ready(function(){
     $('body').on('click', '.edit', function(){
         editCompany(this).parent().parent().attr('id');
     });
+    
+        $('body').on('click', '#find-custumer', function(){
+        findCustomer();
+    });
+    
+    
+    
     
     getListCompanies();
     
@@ -281,6 +329,8 @@ $(document).ready(function(){
      $('#generar-pedido').on('click', function(){
         putPedido();
     });
+    
+    
     
 });
 
