@@ -280,9 +280,12 @@ function findCustomer() {
                 
                  if(!('error' in r)){
                 
-                $('#msg .modal-body').html(r.result['TELEFONO']);
-                $('#msg').addClass('success');
-                $('#msg').modal('toggle');
+                $('#nomb-cliente')
+                $('#tlf-cliente')
+                $('#nomb-cliente')
+                $('#nomb-cliente')
+                $('#nomb-cliente')
+                $('#nomb-cliente')
      
             } else {
                 $('#msg .modal-body').html(r.error);
