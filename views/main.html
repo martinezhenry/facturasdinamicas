@@ -1,14 +1,15 @@
 
 <div class="container main">
+    <form id="main-form">
     <div class="row">
 
-        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><label for="emp-box">Empresa</label><select class="form-control" id="emp-box"><option>Seleccione...</option></select></div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><label for="emp-box">Empresa</label><select class="form-control" id="emp-box"><option value="">Seleccione...</option></select></div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><label for="infile">Excel</label><input type="file" name="infile" id="infile" class="filestyle" data-buttonName="btn-primary" data-buttonText="Cargar Archivo" data-buttonBefore="true"/></div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><div><label for="rep-box">Tipo Reporte</label>
-                <select class="form-control" id="rep-box">
-                    <option value="1">Logo a la Izquierda</option>
-                    <option value="2">Logo Centrado</option>
-                    <option value="3">Logo a la Derecha</option>
+                <select class="form-control" id="fact-type-box">
+                    <option value="">Logo a la Izquierda</option>
+                    <option value="A">Logo Centrado</option>
+                    <option value="B">Logo a la Derecha</option>
                 </select>
             </div>
         </div>
@@ -37,7 +38,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="rif-txt" />
                         <span class="input-group-btn ">
-                            <button title="Buscar" id="find-custumer" class="btn btn-primary">
+                            <button type="button" title="Buscar" id="find-custumer" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;
                             </button>
                         </span>
@@ -45,8 +46,8 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div><label for="nomb-cliente">Nombre</label><input type="text" class="form-control" id="nomb-cliente" /></div></div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div><label for="tlf-cliente">Tlf</label><input type="text" class="form-control" id="tlf-cliente" /></div></div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div><label for="rep-box">Fax</label><input type="text" class="form-control" id="inv-box" /></div></div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div><label for="rep-box">Dirección</label><textarea  class="form-control" id="dat-box"></textarea></div></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div><label for="fax-cliente">Fax</label><input type="text" class="form-control" id="fax-cliente" /></div></div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div><label for="dir-cliente">Dirección</label><textarea  class="form-control" id="dir-cliente"></textarea></div></div>
 
             </div>
         </div>
@@ -171,7 +172,7 @@
 
     </div>
 
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"><button id="generar-pedido" class="btn btn-primary" type="submit">Generar</button></div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"><button id="generar-pedido" class="btn btn-primary" type="button">Generar</button></div>
 
-
+    </form>
 </div>
