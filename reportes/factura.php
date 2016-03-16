@@ -5,6 +5,7 @@
         require_once '../core/DBInspector.php';
         require_once '../core/Configurator.php';
         
+        
         Configurator::getInstance();
 	if (isset($_GET['f']) && isset($_GET['i'])){
         $tipo_fact = $_GET['f'];
@@ -14,6 +15,9 @@
         $date ='';
         $page ='';
         $order ='';
+        $rifEmp = '';
+        $rifCli = '';
+        $imgType = '';
         //$invoice;
         } else {
             header('location: ../');
@@ -22,7 +26,7 @@
         
         function getPedido($invoice){
 
-            global $ship, $date, $order;
+            global $ship, $date, $order, $rifEmp;
             $sql = "select b.qty, b.descripcion, b.precio_unit, b.sub_total, a.num_orden,"
                  . " a.fecha_emision, a.cliente_rif, a.empresa_rif, a.sub_total, a.sale_tax,"
                  . " a.discount, a.freight, a.handling, a.restocking, a.total_sale  from pedidos a, detalle_pedido b where a.num_invoice=b.num_invoice"
@@ -38,6 +42,8 @@
                 getShip($r[0]['cliente_rif']);
                 $date = $r[0]['fecha_emision'];
                 $order = $r[0]['num_orden'];
+                $rifEmp = $r[0]['empresa_rif'];
+                $rifCli = $r[0]['cliente_rif'];
                 
                 return $r;
                 
@@ -51,8 +57,8 @@
         
         
         function getBill($rif) {
-            global $bill;
-            $sql = "select a.RAZON_SOCIAL, a.DIRECCION, a.rif, b.TELEFONO from empresa a, empresa_telefono b where a.rif=b.rif and a.rif='".$rif."' limit 1";
+            global $bill, $imgType;
+            $sql = "select a.RAZON_SOCIAL, a.DIRECCION, a.rif, b.TELEFONO, a.type_logo from empresa a, empresa_telefono b where a.rif=b.rif and a.rif='".$rif."' limit 1";
             DBManagement::getInstance()->consultar($sql);
             $r = DBManagement::getInstance()->getResultSet();
             
@@ -60,6 +66,9 @@
 
                 $bill = $r[0]['RAZON_SOCIAL'] . ", " . $r[0]['rif']. "\n"; 
                 $bill .= $r[0]['DIRECCION'] . "\n" . $r[0]['TELEFONO']. "\n";
+                //echo $r[0]['type_logo'];
+                $imgType = strtoupper(explode('/', $r[0]['type_logo'])[1]);
+                 //echo $imgType;
                 
             } else {
                  header('location: ../');
@@ -87,12 +96,35 @@
             }
             
         }
+        
+        
+        function getImg($e) {
+            
+            $sql = "select logo, type_logo from empresa where rif='".$e."'";
+    
+            DBManagement::getInstance()->consultar($sql);
+            $r = DBManagement::getInstance()->getResultSet();
+
+            if (is_array($r) && count($r) > 0){
+
+                //header("Content-type: ".$r[0]['type_logo']);
+                echo $r[0]['logo'];
+
+
+            } else {
+                $r = FALSE;
+                echo "";
+            }
+
+         }
 	
 	function put_header($pdf,$tipo_fact){
-            global $ship, $date, $invoice, $page, $order;
+            global $ship, $date, $invoice, $page, $order, $rifEmp, $imgType;
+           
 		switch($tipo_fact){
 			case "A":
-				$pdf->Image('../files/logo.jpg',90,5,45,35,'');	
+				$pdf->Image('http://localhost/facturasdinamicas/tools/readImg.php?e='.$rifEmp,90,5,45,35,$imgType);	
+                                //$pdf->MemImage('../tools/readImg.php?e='.$invoice, 50, 30);
 				$pdf->SetXY(15,10);
 				$pdf->Multicell(70,5,utf8_decode('EMPRESA DATA'),'','',FALSE);
 				$pdf->SetXY(15,15);
@@ -180,7 +212,8 @@
 	
         
         $result = getPedido($invoice);
-        
+        getBill($rifEmp);
+        // echo $imgType;
         
 	$pdf = new PDF('P','mm','Letter');	
 	$pdf->SetMargins(0,0,0,0);

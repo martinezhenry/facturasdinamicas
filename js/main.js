@@ -34,7 +34,7 @@ function getListCompanies() {
 
 
 function refreshProducts() {
-    console.log('resfresh');
+    
 
     $.ajax({
         url: 'readExcel.php',
@@ -228,51 +228,6 @@ function callReport() {
 }
 
 
-function uploadLogo() {
-
-    var files = event.target.files;
-    console.log(files);
-    // Create a formdata object and add the files
-    var data = new FormData();
-    $.each(files, function (key, value)
-    {
-        data.append(key, value);
-    });
-
-    console.log(data);
-
-
-    $.ajax({
-        url: 'uploadFile.php?lg',
-        type: 'POST',
-        data: data,
-        cache: false,
-        dataType: 'json',
-        processData: false, // Don't process the files
-        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-        success: function (data, textStatus, jqXHR)
-        {
-            if (typeof data.error === 'undefined')
-            {
-                // Success so call function to process the form
-                $('#file-logo').filestyle('clear');
-                //  refreshProducts();
-            }
-            else
-            {
-                // Handle errors here
-                console.log('ERRORS: ' + data.error);
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            // Handle errors here
-            console.log('ERRORS: ' + textStatus);
-            // STOP LOADING SPINNER
-        }
-    });
-
-}
 
 /**
  * Comment
@@ -339,7 +294,7 @@ $(document).ready(function () {
 
     $('#infile').change(loadFile);
 
-    $('#file-logo').change(uploadLogo);
+    
 
 
 

@@ -4,24 +4,26 @@
  * and open the template in the editor.
  */
 
-
+var errorLogo = true;
+var logoext;
+var logoType;
 function getCompanies(id) {
     console.log('getCompanies');
     $.ajax({
         url: 'controller/companies.php',
-        data: {'parameters' : {'id':id}, 'method': 'getCompanies' },
+        data: {'parameters' : {'parameters':id}, 'method': 'getCompanies' },
         method: 'post',
         dataType: 'json',
         success: function(r){
             
-       
+       console.log(r);
             if (r != false){
                 
                 var html = "";
                 
                 $.each(r, function( key, value ) {
                     html += "<tr id='"+value.id+"'>";
-                    html += "<td>" + value.num + "</td>";
+                    html += "<td>" + (key+1) + "</td>";
                     html += "<td>" + value.rif + "</td>";
                     html += "<td>" + value.razon + "</td>";
                     html += "<td>" + value.dir + "</td>";
@@ -50,9 +52,10 @@ function putCompany() {
     company.dir = $('#dir-txt').val();
     company.tlf = $('#tlf-txt').val();
     company.rif = $('#rif-txt').val();
+    company.logoType = logoType;
+    company.logoExt = logoExt;
     
-    
-    company = JSON.stringify(company);
+    //company = JSON.stringify(company);
     
     
     
@@ -62,19 +65,25 @@ function putCompany() {
         method: 'post',
         dataType: 'json',
         success: function(r){
-
-            if (r != false){
-                
+            console.log(r);
+            if (!('error' in r)){
               
-                $('#msg .modal-body').html('Compañia Creada.');
-                $('#msg').addClass('success');
+                $('#msg .modal-body').html(r.result);
+                $('#msg').addClass('has-success');
+                $('#msg').modal();
+                $('#form-company')[0].reset();
+            } else {
+              
+                $('#msg .modal-body').html(r.error);
+                $('#msg').addClass('has-error');
                 $('#msg').modal();
                 $('#form-company')[0].reset();
             }
         }
     }).fail(function(r){
+        console.log(r);
         $('#msg').html('Error getting companies');
-        $('#msg').addClass('error');
+        $('#msg').addClass('has-error');
     });
 }
 
@@ -82,14 +91,17 @@ function putCompany() {
 
 
 function editCompany() {
+    console.log('edit company');
         var company = new Object();
     company.razon = $('#razon-txt').val();
     company.dir = $('#dir-txt').val();
     company.tlf = $('#tlf-txt').val();
     company.rif = $('#rif-txt').val();
     company.id = $('#id-txt').val();
+    company.logoType = logoType;
+    company.logoExt = logoExt;
     
-    company = JSON.stringify(company);
+    //company = JSON.stringify(company);
     $.ajax({
         url: 'controller/companies.php',
         data: {'parameters' : {'company':company}, 'method': 'editCompany' },
@@ -162,6 +174,71 @@ function deleteCompany(id) {
     });
 }
 
+
+function uploadLogo(event) {
+
+    var files = event.target.files;
+    console.log(files);
+    
+    logoExt = files[0].name;
+    logoType = files[0].type;
+    console.log(logoExt + " : " + logoType);
+    
+    // Create a formdata object and add the files
+    var data = new FormData();
+    $.each(files, function (key, value)
+    {
+        
+        data.append(key, value);
+    });
+
+    console.log(data);
+
+
+    $.ajax({
+        url: 'uploadFile.php?lg',
+        type: 'POST',
+        data: data,
+        cache: false,
+        dataType: 'json',
+        processData: false, // Don't process the files
+        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+        success: function (data, textStatus, jqXHR)
+        {
+            if (typeof data.error === 'undefined')
+            {
+                // Success so call function to process the form
+                $('#file-logo').filestyle('clear');
+                errorLogo = false;
+                $('#file-logo').parent().removeClass('has-error');
+                //  refreshProducts();
+            }
+            else
+            {
+                // Handle errors here
+                console.log('ERRORS: ' + data.error);
+                $('#msg .modal-body').html(data.error);
+                $('#msg').addClass('error');
+                $('#msg').modal('toggle');
+                $('#file-logo').focus();
+                logoType = null;
+                logoExt = null;
+                errorLogo = true;
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            // Handle errors here
+            console.log('ERRORS: ' + textStatus);
+            errorLogo = true;
+            // STOP LOADING SPINNER
+        }
+    });
+
+}
+
+
+
 $(document).ready(function(){
 
     $('body').on('click', '.edit', function(){
@@ -172,17 +249,37 @@ $(document).ready(function(){
         loadDataEditCompany($(this).parent().parent().attr('id'));
     });
     
+     $('body').on('click', '.find-company', function(){
+         getCompanies($('#emp-find').val());
+    });
+    
     
     $('body').on('click', '.cre-company', function(){
-        putCompany();
+        //putCompany();
     });
     
       $('body').on('click', '.edi-company', function(){
-        editCompany();
+       // editCompany();
+    });
+    
+    $('#form-company').submit(function(){
+        console.log('submit');
+        if (errorLogo == false){
+            if ($(this).children('.edi-company') !== 'undefined'){
+                editCompany();
+            } else {
+            putCompany();
+            }
+        } else {
+             $('#file-logo').focus();
+             $('#file-logo').parent().addClass('has-error');
+        }
+        return false;
+        
     });
     
     
-    
+    $('#file-logo').change(uploadLogo);
     getCompanies();
            
 });
