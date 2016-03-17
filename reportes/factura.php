@@ -13,11 +13,12 @@
         $bill = '';
         $ship = '';
         $date ='';
-        $page ='';
+        $page =1;
         $order ='';
         $rifEmp = '';
         $rifCli = '';
         $imgType = '';
+        $totalPag=1;
         //$invoice;
         } else {
             header('location: ../');
@@ -43,6 +44,7 @@
                 $date = $r[0]['fecha_emision'];
                 $order = $r[0]['num_orden'];
                 $rifEmp = $r[0]['empresa_rif'];
+                getBill($rifEmp);
                 $rifCli = $r[0]['cliente_rif'];
                 
                 return $r;
@@ -81,6 +83,7 @@
         function getShip($rif) {
             global $ship;
             $sql = "select a.RAZON_SOCIAL, a.DIRECCION, a.rif, b.TELEFONO from cliente a, cliente_telefono b where a.rif=b.rif and a.rif='".$rif."' limit 1";
+            //echo $sql;
             DBManagement::getInstance()->consultar($sql);
             $r = DBManagement::getInstance()->getResultSet();
             
@@ -119,7 +122,7 @@
          }
 	
 	function put_header($pdf,$tipo_fact){
-            global $ship, $date, $invoice, $page, $order, $rifEmp, $imgType;
+            global $ship, $date, $invoice, $page, $order, $rifEmp, $imgType, $totalPag;
            
 		switch($tipo_fact){
 			case "A":
@@ -179,7 +182,7 @@
 		$pdf->SetXY(85,40);
 		$pdf->Multicell(30,5,utf8_decode($date),1,'C',FALSE);
 		$pdf->SetXY(115,40);
-		$pdf->Multicell(30,5,utf8_decode($page),1,'C',FALSE);
+		$pdf->Multicell(30,5,utf8_decode('Page '.$pdf->PageNo().''),1,'C',FALSE);
 		$pdf->SetXY(145,40);
 		$pdf->Multicell(30,5,utf8_decode($order),1,'C',FALSE);
 		$pdf->SetXY(175,40);
@@ -212,7 +215,8 @@
 	
         
         $result = getPedido($invoice);
-        getBill($rifEmp);
+        
+       // getShip($rifCli);
         // echo $imgType;
         
 	$pdf = new PDF('P','mm','Letter');	
@@ -232,6 +236,7 @@
 	for($i=0;$i<count($result);$i++){
 		
 		if($c_item== 35){
+                        $page++;
 			$pdf->AddPage();
 			put_header($pdf, $tipo_fact);
 			put_t_header($pdf);			
