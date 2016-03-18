@@ -43,15 +43,30 @@
 				}
 				break;
 			case 'buscar_cliente':
-				if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 1) ) {
-                   $aResult['error'] = 'ARGUMENTOS INCOMPLETOS!'; /* 0=>Rif */
+				if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 0) ) {
+                                    $aResult['error'] = 'ARGUMENTOS INCOMPLETOS!'; /* 0=>Rif */
 				}else{
+                                    
+                                         
 					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
 					if (!$mysqli->connect_error){
-						$where = "CL.rif= '" . $_POST['arguments']['rif'] . "'";
-						$SQL = "SELECT * FROM CLIENTE CL INNER JOIN CLIENTE_TELEFONO TEL ON (TEL.rif=CL.rif) WHERE " . $where;
+                                                if (isset($_POST['arguments']['rif']) && $_POST['arguments']['rif'] != ""){
+						$where = "where CL.rif= '" . $_POST['arguments']['rif'] . "'";
+                                                } else {
+                                                    $where = "";
+                                                }
+						$SQL = "SELECT * FROM cliente CL INNER JOIN cliente_telefono TEL ON (TEL.rif=CL.rif) " . $where;
+                                               // var_dump($SQL);
+                                                //exit;
 						$resul = $mysqli->query($SQL); #select("CLIENTE","*",$where,$order,$limit,$mysqli,FALSE);
-						$r = $resul->fetch_array(MYSQLI_ASSOC);
+                                                if (count($where) > 0){
+                                                while($data = $resul->fetch_array(MYSQLI_ASSOC)){
+                                                    $r[] = $data;
+                                                }
+                                                } else {
+                                                    $r = $resul->fetch_array(MYSQLI_ASSOC);
+                                                }
+                                                
 						if(!is_array($r)){ 
 							$aResult['error'] = "BUSQUEDA DE CLIENTE FALLIDA " . $where; 
 						}else{

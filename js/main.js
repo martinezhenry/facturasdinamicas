@@ -5,10 +5,18 @@
  */
 
 
-function getListCompanies() {
+function getListCompanies(id) {
+    var rif = $('#emp-box').val();
+    if (rif ==""){
+                $('#msg .modal-body').html("Debe Ingresar el RIF");
+                $('#msg').addClass('error');
+                $('#msg').modal('toggle');
+                return;
+    }
+    
     $.ajax({
         url: 'controller/companies.php',
-        data: {'method': 'getCompanies'},
+        data: {'method': 'getCompanies', 'parameters': {'id':rif}},
         method: 'post',
         dataType: 'json',
         success: function (r) {
@@ -19,12 +27,12 @@ function getListCompanies() {
                 var html = "";
 
                 $.each(r, function (key, value) {
-                    html += "<option value='" + value.rif + "'>";
-                    html += value.razon;
-                    html += "</<option>";
+                    $('#razon-box-txt').val(value.razon);
+                    $('#direccion-box-txt').val(value.dir);
+                   
 
                 });
-                $('#emp-box').append(html);
+               // $('#emp-box').append(html);
             }
         }
     }).fail(function (r) {
@@ -64,7 +72,7 @@ function refreshProducts() {
                     html += "<td>" + value.cant + "</td>";
                     html += "<td>" + value.numPart + "</td>";
                     html += "<td>" + value.desc + "</td>";
-                    html += "<td>" + value.prec + "</td>";
+                    html += "<td class='"+value.prec+"'>" + value.prec + "</td>";
                     html += "<td>" + value.total + "</td>";
                     // html += "<td><a class='edit icon'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a><a class='delete'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></td>";
                     html += "</tr>";
@@ -194,7 +202,7 @@ console.log($('#emp-box').val());
         
         piePag = JSON.stringify(piePag);
 
-        console.log(pedido);
+       // console.log(pedido);
 
         $.ajax({
             url: 'controller/pedidos.php',
@@ -206,12 +214,12 @@ console.log($('#emp-box').val());
 
                 if (!('error' in r)) {
                     console.log(r.result);
-                    $('#msg .modal-body').html(r.result);
+                    $('#msg .modal-body').html(r.result.split(';'[0]));
                     $('#msg').addClass('success');
                     $('#msg').modal('toggle');
                    
                     var f = $('#fact-type-box').val();
-                    var i = $('#invoice-box').val();
+                    var i = r.result.split(';')[0];
                     console.log('f: '+f + ' i: ' + i);
                     window.open('reportes?f=' +f+ '&i='+i+'&p='+piePag , '_blank');
                     //return false;
@@ -256,12 +264,14 @@ function findCustomer() {
 
             if (!('error' in r)) {
 
-                $('#nomb-cliente').val(r.result['RAZON_SOCIAL']);
-                $('#tlf-cliente').val(r.result['TELEFONO']);
+            $.each(r.result, function( key, value ) {
+                $('#nomb-cliente').val(value.RAZON_SOCIAL);
+                $('#tlf-cliente').val(value.TELEFONO);
                 $('#fax-cliente').val('');
-                $('#dir-cliente').val(r.result['DIRECCION']);
+                $('#dir-cliente').val(value.DIRECCION);
 
-
+            });
+            
             } else {
                 $('#msg .modal-body').html(r.error);
                 $('#msg').addClass('error');
@@ -277,6 +287,23 @@ function findCustomer() {
 }
 
 
+function calculateTotal(){
+    
+    
+    var impuesto = parseInt($('#impuesto-txt').val());
+    var descuento = parseFloat($('#descuento-txt').val().replace(',',''));
+    
+     if ($('#descuento-txt').val() == ""){
+         descuento = 0.0;
+        
+     }
+    var montoDescuento = 0.0;
+    var subTotal =parseFloat($('#sub-total-txt').val().replace(',',''));
+    montoDescuento = parseFloat(subTotal - descuento);
+    $('#total-txt').val((montoDescuento + parseFloat((montoDescuento * impuesto) / 100)).formatMoney(2, '.', ','));
+}
+
+
 function aplicateDiscount(){
     
     
@@ -286,6 +313,8 @@ function aplicateDiscount(){
     var valorFinal;
     var impuesto = parseInt($('#impuesto-txt').val());
     var descuento = parseFloat($('#descuento-txt').val());
+   
+    
     var montoDescuento = 0.0;
     var cantidad=0;
     var producto=0.0;
@@ -297,7 +326,7 @@ function aplicateDiscount(){
                     //console.log(subTotal);
                     //console.log($(this).children('td').eq(4).text() + "----");
                     cantidad = ($(this).children('td').eq(1).text()).replace(/[^0-9]/, '');
-                    producto = (($(this).children('td').eq(4).text()).replace(',','')).replace(/[^0-9.]/, '');
+                    producto = parseFloat((($(this).children('td').eq(4).attr('class')).replace(',','')).replace(/[^0-9.]/, ''));
                     valor = cantidad * producto;
                     //valor = valor.replace(',','');
                     //valor = valor.replace(/[^0-9.]/, '');
@@ -305,14 +334,16 @@ function aplicateDiscount(){
                     
                         if (porcentaje > 0){
                             if ($('#descuento').is(':checked')){
-                                valorFinal = valor - (parseFloat(valor) * porcentaje/100);
+                                //valorFinal = valor - (parseFloat(valor) * porcentaje/100);
+                                producto = producto - (parseFloat(producto) * porcentaje/100);
                             } else {
-                                valorFinal = valor + (parseFloat(valor) * porcentaje/100);
+                                //valorFinal = valor + (parseFloat(valor) * porcentaje/100);
+                                producto = producto + (parseFloat(producto) * porcentaje/100);
                             }
-                   
+                   valorFinal = cantidad * producto;
                     
                 } else {
-                    valorFinal = valor;
+                    valorFinal = cantidad * producto;
                 }
                     
                 subTotal = (parseFloat(subTotal) + parseFloat((valorFinal)));
@@ -320,7 +351,7 @@ function aplicateDiscount(){
          
                    // $('#products tbody').html(html);
                   //  $('#details-products').val(count);
-                   
+                   $(this).children('td').eq(4).text(parseFloat(producto).formatMoney(2, '.', ','));
                    $(this).children('td').eq(5).text(valorFinal.formatMoney(2, '.', ','));
 
     });
@@ -347,10 +378,12 @@ $(document).ready(function () {
         findCustomer();
     });
 
+    $('body').on('click', '#find-company', function () {
+       getListCompanies();
+    });
+    
 
-
-
-    getListCompanies();
+    
 
     $('#infile').change(loadFile);
 
@@ -366,6 +399,10 @@ $(document).ready(function () {
     $('#generar-pedido').on('click', function () {
         putPedido();
     });
+    
+    
+    $('#impuesto-txt').change(calculateTotal);
+    $('#descuento-txt').keyup(calculateTotal);
 
 
 

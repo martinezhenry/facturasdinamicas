@@ -23,6 +23,7 @@ class DBManagement {
     private $countRows;
     private $ultError;
     private static $instance;
+    private $lastId;
 
     private function __construct() {
         // self::$instance = new DBMagnament();
@@ -107,6 +108,7 @@ class DBManagement {
         $stmt->execute($arrBind);
         
         $this->setCountRows($stmt->rowCount());
+        $this->setLastId($this->conn->lastInsertId());
       //  echo $sql;
         //$this->conn->query($sql, PDO::FETCH_ASSOC, $this->resultSet);
         
@@ -246,6 +248,14 @@ class DBManagement {
 
     function setPort($port) {
         $this->port = $port;
+    }
+
+    function getLastId() {
+        return $this->lastId;
+    }
+
+    function setLastId($lastId) {
+        $this->lastId = $lastId;
     }
 
 

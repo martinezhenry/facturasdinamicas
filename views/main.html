@@ -3,7 +3,23 @@
     <form id="main-form">
     <div class="row">
 
-        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><label for="emp-box">Empresa</label><select class="form-control" id="emp-box"><option value="">Seleccione...</option></select></div>
+        <!--<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><label for="emp-box">Empresa</label><select class="form-control" id="emp-box"><option value="">Seleccione...</option></select></div>-->
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><label for="emp-box">Rif Empresa</label>
+            <div class="input-group">
+                        <input type="text" class="form-control" id="emp-box" />
+                        <span class="input-group-btn ">
+                            <button type="button" title="Buscar" id="find-company" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;
+                            </button>
+                        </span>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><label for="emp-box">Razon Social</label>
+                        <input type="text" class="form-control" id="razon-box-txt" readonly/>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><label for="emp-box">Dirección</label>
+                        <input type="text" class="form-control" id="direccion-box-txt" readonly/>
+        </div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><label for="infile">Excel</label><input type="file" name="infile" id="infile" class="filestyle" data-buttonName="btn-primary" data-buttonText="Cargar Archivo" data-buttonBefore="true"/></div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><div><label for="rep-box">Tipo Reporte</label>
                 <select class="form-control" id="fact-type-box">
@@ -179,9 +195,9 @@
             <div class="row marco form-group">
 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Sub-Total</label><input id="sub-total-txt" class="form-control" type="text" readonly/></div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Descuento</label><input id="descuento-txt" class="form-control" type="text" id="desc-txt" value="0.0"/></div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Impuesto</label><input id="impuesto-txt" class="form-control" min="0" max="100" type="number" id="imp-txt" value="0"/></div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Total</label><input id="total-txt" class="form-control" type="text" readonly id="total-txt"/></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Descuento</label><input id="descuento-txt" class="form-control" type="text"  value="0.0"/></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Impuesto</label><input id="impuesto-txt" class="form-control" min="0" max="100" type="number" value="0"/></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Total</label><input id="total-txt" class="form-control" type="text" readonly /></div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Carga</label><input id="carga-txt" class="form-control" type="text" /></div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Entrega</label><input id="entrega-txt" class="form-control" type="text" /></div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Reposición</label><input id="repo-txt" class="form-control" type="text" /></div>
