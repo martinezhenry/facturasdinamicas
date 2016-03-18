@@ -214,12 +214,12 @@ console.log($('#emp-box').val());
 
                 if (!('error' in r)) {
                     console.log(r.result);
-                    $('#msg .modal-body').html(r.result.split(';'[0]));
+                    $('#msg .modal-body').html((r.result).split(';')[0]);
                     $('#msg').addClass('success');
                     $('#msg').modal('toggle');
                    
                     var f = $('#fact-type-box').val();
-                    var i = r.result.split(';')[0];
+                    var i = (r.result).split(';')[1];
                     console.log('f: '+f + ' i: ' + i);
                     window.open('reportes?f=' +f+ '&i='+i+'&p='+piePag , '_blank');
                     //return false;
@@ -383,7 +383,9 @@ $(document).ready(function () {
     });
     
 
-    
+    $('#products tbody tr').find('td').eq(4).dblclick(function (){
+        alert($(this).attr('class'));
+    });
 
     $('#infile').change(loadFile);
 

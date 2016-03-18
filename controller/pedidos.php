@@ -24,7 +24,7 @@ function putPedido($pedido) {
 						
 							$campo = "num_invoice,num_orden,fecha_emision,cliente_rif,empresa_rif, sub_total, sale_tax, discount, freight, handling, restocking, total_sale";
 							$valor = "'" . $pedido['num_invoice'] . "','" . $pedido['num_orden']. "',CURRENT_TIMESTAMP, '".$pedido['cliente_rif']."', '".$pedido['empresa_rif']."', '".preg_replace('/[^0-9.]/','',$pedido['sub_total'])."', '".preg_replace('/[^0-9.]/','',$pedido['sale_tax'])."', '".preg_replace('/[^0-9.]/','',$pedido['discount'])."', '".$pedido['freight']."', '".$pedido['handling']."', '".$pedido['restocking']."', '".preg_replace('/[^0-9.]/','',$pedido['total_sale'])."'";					
-                                                        $sql = "INSERT INTO PEDIDOS (".$campo.") VALUES ($valor)";
+                                                        $sql = "INSERT INTO pedidos (".$campo.") VALUES ($valor)";
                                                         //var_dump($sql);
 							DBManagement::getInstance()->insertar($sql);
 							if(DBManagement::getInstance()->getCountRows() == 1){
@@ -35,7 +35,7 @@ function putPedido($pedido) {
                                                                     
                                                                 
 								$valor = "'" . $detalle['num_invoice'] . "','" . $detalle['qty']. "', '" . $detalle['numPart']. "',  '".$detalle['descripcion']."', '".preg_replace('/[^0-9.]/','',$detalle['precio_unit'])."', '".preg_replace('/[^0-9.]/','',$detalle['sub_total'])."', '" . $idPedido . "'";
-                                                                $sql = "insert into DETALLE_PEDIDO (".$campo.") values (".$valor.")";
+                                                                $sql = "insert into detalle_pedido (".$campo.") values (".$valor.")";
                                                                // var_dump($sql);
 								DBManagement::getInstance()->insertar($sql);
 								if(DBManagement::getInstance()->getCountRows() == 1){							

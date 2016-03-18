@@ -15,18 +15,18 @@
 					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
 					if (!$mysqli->connect_error){
 						$where = "rif= '" . $_POST['arguments']['rif'] . "'";
-						$SQL = "SELECT COUNT(rif) FROM CLIENTE WHERE " . $where;
+						$SQL = "SELECT COUNT(rif) FROM cliente WHERE " . $where;
 						$resul = $mysqli->query($SQL);
 						$r = $resul->fetch_array(MYSQLI_ASSOC);
 						if($r['COUNT(rif)'] == 0){
 							$campo = "rif,razon_social,direccion";
 							$valor = "'" . $_POST['arguments']['rif'] . "','" . $_POST['arguments']['razon_social']. "','" . $_POST['arguments']['direccion'] . "'";					
-							$cliente_insert = $obj_bdmysql->insert("CLIENTE", $campo, $valor, $mysqli);
+							$cliente_insert = $obj_bdmysql->insert("cliente", $campo, $valor, $mysqli);
                                                        
 							if($cliente_insert == 1){
 								$campo = "rif,telefono";						
 								$valor = "'" .  $_POST['arguments']['rif'] . "','" . $_POST['arguments']['telefono'] . "'";
-								$cliente_insert = $obj_bdmysql->insert("CLIENTE_TELEFONO", $campo, $valor, $mysqli);
+								$cliente_insert = $obj_bdmysql->insert("cliente_telefono", $campo, $valor, $mysqli);
 								if($cliente_insert == 1){							
 									$aResult['result'] = "CLIENTE CREADO CON EXITO: " . $_POST['arguments']['razon_social'] . " " . $_POST['arguments']['rif'];					
 								}else{
@@ -56,16 +56,15 @@
                                                     $where = "";
                                                 }
 						$SQL = "SELECT * FROM cliente CL INNER JOIN cliente_telefono TEL ON (TEL.rif=CL.rif) " . $where;
+                                                
                                                // var_dump($SQL);
                                                 //exit;
 						$resul = $mysqli->query($SQL); #select("CLIENTE","*",$where,$order,$limit,$mysqli,FALSE);
-                                                if (count($where) > 0){
+                                                $r=null;
                                                 while($data = $resul->fetch_array(MYSQLI_ASSOC)){
                                                     $r[] = $data;
                                                 }
-                                                } else {
-                                                    $r = $resul->fetch_array(MYSQLI_ASSOC);
-                                                }
+                                               
                                                 
 						if(!is_array($r)){ 
 							$aResult['error'] = "BUSQUEDA DE CLIENTE FALLIDA " . $where; 
@@ -82,7 +81,7 @@
 					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
 					if (!$mysqli->connect_error){
 						$where = "rif= '" . $_POST['arguments']['rif'] . "'";
-						$SQL = "SELECT COUNT(rif) FROM CLIENTE WHERE " . $where;
+						$SQL = "SELECT COUNT(rif) FROM cliente WHERE " . $where;
 						$resul = $mysqli->query($SQL); 
 						$r = $resul->fetch_array(MYSQLI_ASSOC);
 						if(!is_array($r)){ 
@@ -100,7 +99,7 @@
 				}else{
 					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
 					if (!$mysqli->connect_error){						
-						$resul = $mysqli->query("SELECT rif FROM CLIENTE");
+						$resul = $mysqli->query("SELECT rif FROM cliente");
 						$r = $resul->fetch_array(MYSQLI_ASSOC);
 						if(!is_array($r)){ 
 							$aResult['error'] = "BUSQUEDA DE CLIENTE FALLIDA"; 
@@ -117,7 +116,7 @@
 				}else{
 					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
 					if (!$mysqli->connect_error){						
-						$resul = $mysqli->query("SELECT * FROM CLIENTE CL INNER JOIN CLIENTE_TELEFONO TEL ON (TEL.rif=CL.rif)");
+						$resul = $mysqli->query("SELECT * FROM cliente CL INNER JOIN cliente_telefono TEL ON (TEL.rif=CL.rif)");
 						$r = $resul->fetch_array(MYSQLI_ASSOC);
 						if(!is_array($r)){ 
 							$aResult['error'] = "BUSQUEDA DE CLIENTE FALLIDA"; 
@@ -138,7 +137,7 @@
 						$campos ="";
 						$cnt = 0;
 						$arg = 0;
-						$resul = $mysqli->query("SELECT RIF, RAZON_SOCIAL, DIRECCION FROM CLIENTE " . $where);
+						$resul = $mysqli->query("SELECT RIF, RAZON_SOCIAL, DIRECCION FROM cliente " . $where);
 						$r = $resul->fetch_array(MYSQLI_ASSOC);
 						foreach($_POST['arguments'] as $key=>$value){
 							if($key != 'telefono'){
@@ -159,7 +158,7 @@
                                                 
                                                 
                                                 if($camposTlf != ""){
-							$SQL = "UPDATE CLIENTE_TELEFONO SET " . $camposTlf . " " . $where;
+							$SQL = "UPDATE cliente_telefono SET " . $camposTlf . " " . $where;
 							if($mysqli->query($SQL)){
 								$tlf = true;
 							}else{
@@ -169,7 +168,7 @@
 						}
                                                 
 						if($campos != ""){
-							$SQL = "UPDATE CLIENTE SET " . $campos . " " . $where;
+							$SQL = "UPDATE cliente SET " . $campos . " " . $where;
 							if($mysqli->query($SQL)){
 								$aResult['result'] = "DATOS ACTUALIZADOS SATISFACTORIAMENTE " ;
 								$aResult['query'] = $SQL;
@@ -197,10 +196,31 @@
 				}
 				break;
 			case 'eliminar_cliente':
-				if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 3) ) {
+				if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 1) ) {
                    $aResult['error'] = "ARGUMENTOS INCOMPLETOS!";
 				}else{
-					
+					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
+					if (!$mysqli->connect_error){						
+						
+						$sql = "delete from cliente where rif='".$_POST['arguments']['rif']."'";
+                                               // var_dump($sql);
+                                               if(!$mysqli->query($sql)){
+                                                   
+                                                  
+							$aResult['error'] = "ELIMINACIÓN DE CLIENTE FALLIDA"; 
+                                                   
+						}else{
+                                                     $sql = "delete from cliente_telefono where rif='".$_POST['arguments']['rif']."'";
+                                                   if(!$mysqli->query($sql)){
+							$aResult['result'] = "CLIENTE ELIMINADO, PERO NO SE ELIMINO EL TLF";
+                                                        
+                                                        } else {
+                                                       
+                                                       $aResult['result'] = "CLIENTE ELIMINADO";
+                                                   }
+						}											
+						
+					}else{ $aResult['error'] = "NO SE PUDO CONECTAR A LA BASE DE DATOS!"; }
 				}
 				break;
 			default:

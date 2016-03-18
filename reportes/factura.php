@@ -156,11 +156,15 @@
          }
 	
 	function put_header($pdf,$tipo_fact){
-            global $ship, $date, $invoice, $page, $order, $rifEmp, $imgType, $totalPag, $razonEmp, $dirEmp, $tlfEmp;
-           
+            global $ship, $date, $invoice, $page, $order, $rifEmp, $imgType, $totalPag, $razonEmp, $dirEmp, $tlfEmp, $id;
+           if (!isset($_SERVER['HTTP_REFERER'])){
+              $ruta = "http://". $_SERVER['SERVER_NAME'].'/facturas/';
+           } else {
+               $ruta = $_SERVER['HTTP_REFERER'];
+           }
 		switch($tipo_fact){
 			case "A":
-				$pdf->Image('http://sistemashm.com/facturas/tools/readImg.php?e='.$rifEmp,90,5,45,35,$imgType);	
+				$pdf->Image($ruta.'tools/readImg.php?e='.$rifEmp,90,5,45,35,$imgType);	
                                 //$pdf->MemImage('../tools/readImg.php?e='.$invoice, 50, 30);
 				$pdf->SetXY(15,10);
                                 //$pdf->SetFont('Arial','B',12);
@@ -173,7 +177,7 @@
 				//$pdf->Multicell(50,5,utf8_decode($tlfEmp),1,'',FALSE);
 				break;
 			case "B":
-				$pdf->Image('http://sistemashm.com/facturas/tools/readImg.php?e='.$rifEmp,155,5,45,35,$imgType);
+				$pdf->Image($ruta.'tools/readImg.php?e='.$rifEmp,155,5,45,35,$imgType);
 				//$pdf->SetFont('Arial','B',12);
 				$pdf->SetXY(15,10);
 				$pdf->Multicell(100,5,utf8_decode($razonEmp. "\n". $dirEmp . "\n". $tlfEmp),'','',FALSE);
@@ -185,7 +189,7 @@
 				//$pdf->Multicell(100,5,utf8_decode($tlfEmp),'','',FALSE);
 				break;
 			default:
-				$pdf->Image('http://sistemashm.com/facturas/tools/readImg.php?e='.$rifEmp,15,5,45,35,$imgType);	
+				$pdf->Image($ruta.'tools/readImg.php?e='.$rifEmp,15,5,45,35,$imgType);	
 				$pdf->SetXY(60,10);
 				//$pdf->SetFont('Arial','B',12);
 				$pdf->Multicell(100,5,utf8_decode($razonEmp. "\n". $dirEmp . "\n". $tlfEmp),'','',FALSE);
@@ -321,7 +325,7 @@
 		}
 		
                 
-               // $y_pos += 5;
+                $y_pos += 5;
                 $pdf->SetXY(15,$y_pos);
                 $yOrg = $y_pos;
                 $y_pos += 5;
