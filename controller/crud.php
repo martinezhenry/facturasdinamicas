@@ -1,6 +1,10 @@
 <?php	
 	header('Content-Type: application/json');
 	include '../common/general.php';
+        require_once '../core/DBManagement.php';
+        require_once '../core/DBInspector.php';
+        require_once '../core/Configurator.php';
+        Configurator::getInstance();
 	$obj_function = new coFunction();
 	$obj_bdmysql = new coBdmysql();
 	#$cod_usuario = $_SESSION["cod_usuario"];
@@ -12,10 +16,13 @@
 				if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 3) ) {
                    $aResult['error'] = 'ARGUMENTOS INCOMPLETOS!';
 				}else{
-					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
+                                        
+                                        $mysqli = new mysqli(DBManagement::getInstance()->getHost(), DBManagement::getInstance()->getUser(), DBManagement::getInstance()->getPass(), DBManagement::getInstance()->getDbName());
+					//$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
 					if (!$mysqli->connect_error){
 						$where = "rif= '" . $_POST['arguments']['rif'] . "'";
 						$SQL = "SELECT COUNT(rif) FROM cliente WHERE " . $where;
+                                               // var_dump($SQL);
 						$resul = $mysqli->query($SQL);
 						$r = $resul->fetch_array(MYSQLI_ASSOC);
 						if($r['COUNT(rif)'] == 0){
@@ -47,8 +54,8 @@
                                     $aResult['error'] = 'ARGUMENTOS INCOMPLETOS!'; /* 0=>Rif */
 				}else{
                                     
-                                         
-					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
+                                         $mysqli = new mysqli(DBManagement::getInstance()->getHost(), DBManagement::getInstance()->getUser(), DBManagement::getInstance()->getPass(), DBManagement::getInstance()->getDbName());
+					//$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
 					if (!$mysqli->connect_error){
                                                 if (isset($_POST['arguments']['rif']) && $_POST['arguments']['rif'] != ""){
 						$where = "where CL.rif= '" . $_POST['arguments']['rif'] . "'";
@@ -78,7 +85,8 @@
 				if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 1) ) {
                    $aResult['error'] = 'ARGUMENTOS INCOMPLETOS!'; /* 0=>Rif */
 				}else{
-					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
+                                    $mysqli = new mysqli(DBManagement::getInstance()->getHost(), DBManagement::getInstance()->getUser(), DBManagement::getInstance()->getPass(), DBManagement::getInstance()->getDbName());
+					//$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
 					if (!$mysqli->connect_error){
 						$where = "rif= '" . $_POST['arguments']['rif'] . "'";
 						$SQL = "SELECT COUNT(rif) FROM cliente WHERE " . $where;
@@ -97,7 +105,8 @@
 				if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 0) ) {
                    $aResult['error'] = 'ARGUMENTOS INCOMPLETOS!'; /* 0=>Rif */
 				}else{
-					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
+                                    $mysqli = new mysqli(DBManagement::getInstance()->getHost(), DBManagement::getInstance()->getUser(), DBManagement::getInstance()->getPass(), DBManagement::getInstance()->getDbName());
+					//$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
 					if (!$mysqli->connect_error){						
 						$resul = $mysqli->query("SELECT rif FROM cliente");
 						$r = $resul->fetch_array(MYSQLI_ASSOC);
@@ -114,7 +123,8 @@
 				if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 0) ) {
                    $aResult['error'] = 'ARGUMENTOS INCOMPLETOS!'; /* 0=>Rif */
 				}else{
-					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
+                                    $mysqli = new mysqli(DBManagement::getInstance()->getHost(), DBManagement::getInstance()->getUser(), DBManagement::getInstance()->getPass(), DBManagement::getInstance()->getDbName());
+					//$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
 					if (!$mysqli->connect_error){						
 						$resul = $mysqli->query("SELECT * FROM cliente CL INNER JOIN cliente_telefono TEL ON (TEL.rif=CL.rif)");
 						$r = $resul->fetch_array(MYSQLI_ASSOC);
@@ -131,7 +141,8 @@
 				if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 3) ) {
                    $aResult['error'] = "ARGUMENTOS INCOMPLETOS!";
 				}else{
-					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);					
+                                    $mysqli = new mysqli(DBManagement::getInstance()->getHost(), DBManagement::getInstance()->getUser(), DBManagement::getInstance()->getPass(), DBManagement::getInstance()->getDbName());
+					//$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);					
 					if (!$mysqli->connect_error){						
 						$where = " WHERE rif= '" . $_POST['arguments']['rif'] . "'";
 						$campos ="";
@@ -199,7 +210,8 @@
 				if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 1) ) {
                    $aResult['error'] = "ARGUMENTOS INCOMPLETOS!";
 				}else{
-					$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
+                                    $mysqli = new mysqli(DBManagement::getInstance()->getHost(), DBManagement::getInstance()->getUser(), DBManagement::getInstance()->getPass(), DBManagement::getInstance()->getDbName());
+					//$mysqli = new mysqli(DBHOST3, DBUSER3, DBPASS3, DBNOM3);
 					if (!$mysqli->connect_error){						
 						
 						$sql = "delete from cliente where rif='".$_POST['arguments']['rif']."'";
