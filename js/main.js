@@ -62,6 +62,7 @@ function refreshProducts() {
                     html += "<tr >";
                     html += "<td>" + (key + 1) + "</td>";
                     html += "<td>" + value.cant + "</td>";
+                    html += "<td>" + value.numPart + "</td>";
                     html += "<td>" + value.desc + "</td>";
                     html += "<td>" + value.prec + "</td>";
                     html += "<td>" + value.total + "</td>";
@@ -79,6 +80,9 @@ function refreshProducts() {
         }
 
 
+    }).fail(function(r){
+        
+        console.log(r);
     });
 
 }
@@ -170,18 +174,25 @@ console.log($('#emp-box').val());
 
             detalle.num_invoice = $('#invoice-box').val(),
                     detalle.qty = $(v).find("td").eq(1).html(),
-                    detalle.descripcion = $(v).find("td").eq(2).html(),
-                    detalle.precio_unit = $(v).find("td").eq(3).html(),
-                    detalle.sub_total = $(v).find("td").eq(4).html();
+                    detalle.numPart = $(v).find("td").eq(2).html(),
+                    detalle.descripcion = $(v).find("td").eq(3).html(),
+                    detalle.precio_unit = $(v).find("td").eq(4).html(),
+                    detalle.sub_total = $(v).find("td").eq(5).html();
 
             (pedido.detalle).push(detalle);
             detalle = new Object();
         });
 
-        if (pedido.detalle.length > 0){
-            
-        }
-        //pedido = JSON.stringify(pedido);
+        var piePag = new Object();
+        
+        piePag.pie = $('#pie-txt').val();
+        piePag.contactName = $('#contactName-txt').val();
+        piePag.tlfLocal = $('#tlfLocal-txt').val();
+        piePag.tlfWork = $('#tlfWork-txt').val();
+        piePag.email = $('#email-txt').val();
+        
+        
+        piePag = JSON.stringify(piePag);
 
         console.log(pedido);
 
@@ -202,9 +213,10 @@ console.log($('#emp-box').val());
                     var f = $('#fact-type-box').val();
                     var i = $('#invoice-box').val();
                     console.log('f: '+f + ' i: ' + i);
-                    window.open('reportes?f=' +f+ '&i='+i , '_blank');
+                    window.open('reportes?f=' +f+ '&i='+i+'&p='+piePag , '_blank');
                     //return false;
                      $('#main-form')[0].reset();
+                     $('#products tbody tr').remove();
 
                 } else {
                     $('#msg .modal-body').html(r.error);
@@ -217,14 +229,6 @@ console.log($('#emp-box').val());
             console.log('error: ' + r);
         });
     }
-}
-
-
-
-function callReport() {
-
-
-
 }
 
 
@@ -273,6 +277,62 @@ function findCustomer() {
 }
 
 
+function aplicateDiscount(){
+    
+    
+    var porcentaje = $('#porc-desc-txt').val();
+    var subTotal = 0.0;
+    var valor;
+    var valorFinal;
+    var impuesto = parseInt($('#impuesto-txt').val());
+    var descuento = parseFloat($('#descuento-txt').val());
+    var montoDescuento = 0.0;
+    var cantidad=0;
+    var producto=0.0;
+  //  console.log('aplicate');
+
+     $('#products tbody tr').each(function (key, value) {
+                    //count = count + 1;
+                    
+                    //console.log(subTotal);
+                    //console.log($(this).children('td').eq(4).text() + "----");
+                    cantidad = ($(this).children('td').eq(1).text()).replace(/[^0-9]/, '');
+                    producto = (($(this).children('td').eq(4).text()).replace(',','')).replace(/[^0-9.]/, '');
+                    valor = cantidad * producto;
+                    //valor = valor.replace(',','');
+                    //valor = valor.replace(/[^0-9.]/, '');
+                    //console.log(valor);
+                    
+                        if (porcentaje > 0){
+                            if ($('#descuento').is(':checked')){
+                                valorFinal = valor - (parseFloat(valor) * porcentaje/100);
+                            } else {
+                                valorFinal = valor + (parseFloat(valor) * porcentaje/100);
+                            }
+                   
+                    
+                } else {
+                    valorFinal = valor;
+                }
+                    
+                subTotal = (parseFloat(subTotal) + parseFloat((valorFinal)));
+                
+         
+                   // $('#products tbody').html(html);
+                  //  $('#details-products').val(count);
+                   
+                   $(this).children('td').eq(5).text(valorFinal.formatMoney(2, '.', ','));
+
+    });
+    
+                    $('#sub-total-txt').val(subTotal.formatMoney(2, '.', ','));
+                    montoDescuento = parseFloat(subTotal - descuento);
+                  //  console.log(montoDescuento);
+                    $('#total-txt').val((montoDescuento + parseFloat((montoDescuento * impuesto) / 100)).formatMoney(2, '.', ','));
+                
+}
+
+
 $(document).ready(function () {
 
 //$(":file").filestyle();
@@ -295,10 +355,13 @@ $(document).ready(function () {
     $('#infile').change(loadFile);
 
     
+    $('#porc-desc-txt, #descuento, #aumento').change(function (){
+        aplicateDiscount();
+        
+    });
 
 
-
-    $('#fec-box').datepicker({dateFormat: 'dd/mm/yy'});
+    $('#fecha-box').datepicker({dateFormat: 'dd/mm/yy'});
 
     $('#generar-pedido').on('click', function () {
         putPedido();

@@ -11,6 +11,7 @@ class Producto {
     private $descripcion;
     private $precio;
     private $total;
+    private $numPart;
     
     
     function getCantidad() {
@@ -44,12 +45,22 @@ class Producto {
     function setTotal($total) {
         $this->total = $total;
     }
+    
+    function getNumPart() {
+        return $this->numPart;
+    }
 
+    function setNumPart($numPart) {
+        $this->numPart = $numPart;
+    }
+
+    
     
 
     function getArrayVars() {
         return array(
             'cant' => $this->cantidad,
+            'numPart' => $this->numPart,
             'desc' => $this->descripcion,
             'prec' => $this->precio,
             'total' => number_format($this->total, 2, '.', ',')

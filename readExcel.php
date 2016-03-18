@@ -30,8 +30,9 @@ $objWorksheet = $objPHPExcel->setActiveSheetIndexByName('Sheet1');
 for ($i=1; $i < $objPHPExcel->getActiveSheet()->getHighestRow(); $i++) {
    $producto = new Producto();
    $producto->setCantidad($objPHPExcel->getActiveSheet()->getCell('A'.($i+1))->getFormattedValue());
-   $producto->setDescripcion($objPHPExcel->getActiveSheet()->getCell('B'.($i+1))->getFormattedValue());
-   $producto->setPrecio($objPHPExcel->getActiveSheet()->getCell('C'.($i+1))->getFormattedValue());
+   $producto->setNumPart($objPHPExcel->getActiveSheet()->getCell('B'.($i+1))->getFormattedValue());
+   $producto->setDescripcion($objPHPExcel->getActiveSheet()->getCell('C'.($i+1))->getFormattedValue());
+   $producto->setPrecio($objPHPExcel->getActiveSheet()->getCell('D'.($i+1))->getFormattedValue());
    $producto->setTotal(((int) preg_replace('/[A-Za-z-$]/','',$producto->getCantidad()))*((float) preg_replace('/[^0-9.]/','',$producto->getPrecio())));
    $productos[] = $producto->getArrayVars();
    //var_dump((float) preg_replace('/[^0-9.]/','',$producto->getPrecio()));

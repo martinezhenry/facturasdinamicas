@@ -6,8 +6,11 @@
         require_once '../core/Configurator.php';
         
         
+       
+        
         Configurator::getInstance();
-	if (isset($_GET['f']) && isset($_GET['i'])){
+	if (isset($_GET['f']) && isset($_GET['i']) && $_GET['p']){
+        $pie = json_decode($_GET['p']);
         $tipo_fact = $_GET['f'];
         $invoice = $_GET['i'];
         $bill = '';
@@ -16,9 +19,25 @@
         $page =1;
         $order ='';
         $rifEmp = '';
+        $razonEmp='';
+        $dirEmp ='';
+        $tlfEmp = '';
         $rifCli = '';
         $imgType = '';
         $totalPag=1;
+        $piePag = $pie->pie;
+        $contactName = $pie->contactName;
+        $homePhone = $pie->tlfLocal;
+        $workPhone = $pie->tlfWork;
+        $emailAdr= $pie->email;
+        $subTotal='';
+        $salesTax='';
+        $discount='';
+        $freight='';
+        $handling='';
+        $restoking='';
+        $totalSale='';
+        
         //$invoice;
         } else {
             header('location: ../');
@@ -27,8 +46,8 @@
         
         function getPedido($invoice){
 
-            global $ship, $date, $order, $rifEmp;
-            $sql = "select b.qty, b.descripcion, b.precio_unit, b.sub_total, a.num_orden,"
+            global $ship, $date, $order, $rifEmp, $subTotal, $salesTax, $totalSale, $restoking, $handling, $freight, $discount;
+            $sql = "select b.qty, b.num_part, b.descripcion, b.precio_unit, b.sub_total as sub_totalP, a.num_orden,"
                  . " a.fecha_emision, a.cliente_rif, a.empresa_rif, a.sub_total, a.sale_tax,"
                  . " a.discount, a.freight, a.handling, a.restocking, a.total_sale  from pedidos a, detalle_pedido b where a.num_invoice=b.num_invoice"
                     . " and a.num_invoice = '".$invoice."'";
@@ -46,6 +65,15 @@
                 $rifEmp = $r[0]['empresa_rif'];
                 getBill($rifEmp);
                 $rifCli = $r[0]['cliente_rif'];
+                $subTotal = $r[0]['sub_total'];
+                $salesTax = $r[0]['sale_tax'];
+                $discount = $r[0]['discount'];
+                $freight = $r[0]['freight'];
+                $handling = $r[0]['handling'];
+                $restoking = $r[0]['restocking'];
+                $totalSale = $r[0]['total_sale'];
+                
+
                 
                 return $r;
                 
@@ -59,7 +87,7 @@
         
         
         function getBill($rif) {
-            global $bill, $imgType;
+            global $bill, $imgType, $razonEmp, $dirEmp, $tlfEmp;
             $sql = "select a.RAZON_SOCIAL, a.DIRECCION, a.rif, b.TELEFONO, a.type_logo from empresa a, empresa_telefono b where a.rif=b.rif and a.rif='".$rif."' limit 1";
             DBManagement::getInstance()->consultar($sql);
             $r = DBManagement::getInstance()->getResultSet();
@@ -68,7 +96,13 @@
 
                 $bill = $r[0]['RAZON_SOCIAL'] . ", " . $r[0]['rif']. "\n"; 
                 $bill .= $r[0]['DIRECCION'] . "\n" . $r[0]['TELEFONO']. "\n";
+                
+                $razonEmp = $r[0]['RAZON_SOCIAL'];
                 //echo $r[0]['type_logo'];
+                
+                $dirEmp =$r[0]['DIRECCION'];
+                $tlfEmp = $r[0]['TELEFONO'];
+                
                 $imgType = strtoupper(explode('/', $r[0]['type_logo'])[1]);
                  //echo $imgType;
                 
@@ -122,44 +156,44 @@
          }
 	
 	function put_header($pdf,$tipo_fact){
-            global $ship, $date, $invoice, $page, $order, $rifEmp, $imgType, $totalPag;
+            global $ship, $date, $invoice, $page, $order, $rifEmp, $imgType, $totalPag, $razonEmp, $dirEmp, $tlfEmp;
            
 		switch($tipo_fact){
 			case "A":
 				$pdf->Image('http://localhost/facturasdinamicas/tools/readImg.php?e='.$rifEmp,90,5,45,35,$imgType);	
                                 //$pdf->MemImage('../tools/readImg.php?e='.$invoice, 50, 30);
 				$pdf->SetXY(15,10);
-				$pdf->Multicell(70,5,utf8_decode('EMPRESA DATA'),'','',FALSE);
+				$pdf->Multicell(70,5,utf8_decode($razonEmp),'','',FALSE);
 				$pdf->SetXY(15,15);
 				$pdf->SetFont('Arial','',10);
-				$pdf->Multicell(70,5,utf8_decode('EMPRESA DIRECCION'),'','',FALSE);
+				$pdf->Multicell(70,5,utf8_decode($dirEmp),'','',FALSE);
 				$pdf->SetXY(15,20);
 				$pdf->SetFont('Arial','',8);
-				$pdf->Multicell(70,5,utf8_decode('EMPRESA TELEFONO'),'','',FALSE);
+				$pdf->Multicell(70,5,utf8_decode($tlfEmp),'','',FALSE);
 				break;
 			case "B":
-				$pdf->Image('../files/logo.jpg',155,5,45,35,'');
+				$pdf->Image('http://localhost/facturasdinamicas/tools/readImg.php?e='.$rifEmp,155,5,45,35,$imgType);
 				$pdf->SetFont('Arial','B',12);
 				$pdf->SetXY(15,10);
-				$pdf->Multicell(70,5,utf8_decode('EMPRESA DATA'),'','',FALSE);
+				$pdf->Multicell(70,5,utf8_decode($razonEmp),'','',FALSE);
 				$pdf->SetXY(15,15);
 				$pdf->SetFont('Arial','',10);
-				$pdf->Multicell(70,5,utf8_decode('EMPRESA DIRECCION'),'','',FALSE);
+				$pdf->Multicell(70,5,utf8_decode($dirEmp),'','',FALSE);
 				$pdf->SetXY(15,20);
 				$pdf->SetFont('Arial','',8);
-				$pdf->Multicell(70,5,utf8_decode('EMPRESA TELEFONO'),'','',FALSE);
+				$pdf->Multicell(70,5,utf8_decode($tlfEmp),'','',FALSE);
 				break;
 			default:
-				$pdf->Image('../files/logo.jpg',15,5,45,35,'');	
+				$pdf->Image('http://localhost/facturasdinamicas/tools/readImg.php?e='.$rifEmp,15,5,45,35,$imgType);	
 				$pdf->SetXY(60,10);
 				$pdf->SetFont('Arial','B',12);
-				$pdf->Multicell(70,5,utf8_decode('EMPRESA DATA'),'','',FALSE);
+				$pdf->Multicell(70,5,utf8_decode($razonEmp),'','',FALSE);
 				$pdf->SetXY(60,15);
 				$pdf->SetFont('Arial','',10);
-				$pdf->Multicell(70,5,utf8_decode('EMPRESA DIRECCION'),'','',FALSE);
+				$pdf->Multicell(70,5,utf8_decode($dirEmp),'','',FALSE);
 				$pdf->SetXY(60,20);
 				$pdf->SetFont('Arial','',8);
-				$pdf->Multicell(70,5,utf8_decode('EMPRESA TELEFONO'),'','',FALSE);
+				$pdf->Multicell(70,5,utf8_decode($tlfEmp),'','',FALSE);
 				break;
 		}
 		
@@ -212,6 +246,17 @@
 		$pdf->SetXY(185,80);
 		$pdf->Multicell(20,5,utf8_decode('Total'),1,'C',FALSE);
 	}
+        
+        function put_t_footer($pdf){
+		$pdf->SetXY(15,80);
+		$pdf->Multicell(10,5,utf8_decode('QTY'),1,'',FALSE);
+		$pdf->SetXY(25,80);
+		$pdf->Multicell(140,5,utf8_decode('Description'),1,'C',FALSE);
+		$pdf->SetXY(165,80);
+		$pdf->Multicell(20,5,utf8_decode('UnitPrice'),1,'C',FALSE);
+		$pdf->SetXY(185,80);
+		$pdf->Multicell(20,5,utf8_decode('Total'),1,'C',FALSE);
+	}
 	
         
         $result = getPedido($invoice);
@@ -248,18 +293,86 @@
 		$pdf->Multicell(10,5,utf8_decode($result[$i]['qty']),1,'',FALSE);
 		
 		$pdf->SetXY($x_pos + 10,$y_pos);
-		$pdf->Multicell(140,5,utf8_decode($result[$i]['descripcion']),1,'C',FALSE);
+		$pdf->Multicell(140,5,utf8_decode($result[$i]['num_part'] . ' - ' . $result[$i]['descripcion']),1,'C',FALSE);
 		
 		$pdf->SetXY($x_pos + 150,$y_pos);		
 		$pdf->Multicell(20,5,utf8_decode($result[$i]['precio_unit']),1,'C',FALSE);
 		
 		$pdf->SetXY($x_pos + 170,$y_pos);
-		$pdf->Multicell(20,5,utf8_decode($result[$i]['sub_total']),1,'C',FALSE);
+		$pdf->Multicell(20,5,utf8_decode($result[$i]['sub_totalP']),1,'C',FALSE);
 		$y_pos += 5;
 		$c_item++;
 	}
 	
-	
+                
+                $y_pos += 5;
+                $pdf->SetXY(15,$y_pos);
+                $yOrg = $y_pos;
+                $y_pos += 5;
+                $pdf->Multicell(150,5,utf8_decode('Notas'),1,'C',FALSE);
+                $pdf->SetXY(15,$y_pos);
+                $y_pos += 20;
+		$pdf->Multicell(150,20,utf8_decode($piePag),1,'',FALSE);
+		$pdf->SetXY(15,$y_pos);
+                $y_pos += 5;
+		$pdf->Multicell(40,5,utf8_decode('Nombre de Contacto'),1,'C',FALSE);
+		$pdf->SetXY(15,$y_pos);
+                
+		$pdf->Multicell(40,5,utf8_decode($contactName),1,'',FALSE);
+                
+                $pdf->SetXY(55,$y_pos-5);
+                $pdf->Multicell(30,5,utf8_decode('Tlf Local'),1,'C',FALSE);
+                $pdf->SetXY(55,$y_pos);
+                $pdf->Multicell(30,5,utf8_decode($homePhone),1,'',FALSE);
+                
+                $pdf->SetXY(85,$y_pos-5);
+                $pdf->Multicell(30,5,utf8_decode('Tlf de Trabajo'),1,'C',FALSE);
+                $pdf->SetXY(85,$y_pos);
+                $pdf->Multicell(30,5,utf8_decode($workPhone),1,'',FALSE);
+                
+                $pdf->SetXY(115,$y_pos-5);
+                $pdf->Multicell(50,5,utf8_decode('Email'),1,'C',FALSE);
+                $pdf->SetXY(115,$y_pos);
+                $pdf->Multicell(50,5,utf8_decode($emailAdr),1,'',FALSE);
+                
+		$pdf->SetXY(165,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode('Sub-Total'),1,'R',FALSE);
+                $pdf->SetXY(185,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode($subTotal),1,'R',FALSE);
+                $yOrg += 5;
+                $pdf->SetXY(165,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode('Impuesto'),1,'R',FALSE);
+                $pdf->SetXY(185,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode($salesTax),1,'R',FALSE);
+                $yOrg += 5;
+                $pdf->SetXY(165,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode('Descuento'),1,'R',FALSE);
+                $pdf->SetXY(185,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode($discount),1,'R',FALSE);
+                $yOrg += 5;
+                $pdf->SetXY(165,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode('Carga'),1,'R',FALSE);
+                $pdf->SetXY(185,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode($discount),1,'R',FALSE);
+                $yOrg += 5;
+                $pdf->SetXY(165,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode('Entrega'),1,'R',FALSE);
+                $pdf->SetXY(185,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode($handling),1,'R',FALSE);
+                $yOrg += 5;
+                $pdf->SetXY(165,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode('Reposición'),1,'R',FALSE);
+                $pdf->SetXY(185,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode($restoking),1,'R',FALSE);
+                
+                $yOrg += 5;
+                $pdf->SetXY(165,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode('Total'),1,'R',FALSE);
+                $pdf->SetXY(185,$yOrg);
+                $pdf->Multicell(20,5,utf8_decode($totalSale),1,'R',FALSE);
+		
+                
+
 	
 	$pdf->Output();
 ?>

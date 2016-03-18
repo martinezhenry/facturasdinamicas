@@ -8,11 +8,12 @@ $( document ).ready(function() {
 	});		
 	
 	$('#guardar').on('click',function(){
+            
 		var rif = $('#rif').val();
 		var razon_social = $('#razon_social').val();
 		var dir = $('#dir').val();
 		var telefono = $('#telefono').val();
-		var args = {'rif' : rif,'razon_social' : razon_social, 'direccion': dir, 'telefono':telefono}
+		var args = {'rif' : rif,'razon_social' : razon_social, 'direccion': dir, 'telefono':telefono};
 		console.log(args);
 		jQuery.ajax({
 			type: "POST",
@@ -20,26 +21,37 @@ $( document ).ready(function() {
 			dataType: 'json',
 			data: {functionname: 'agregar_cliente', arguments:args},
 			success: function (obj, textstatus){
+                            console.log(obj);
 				if(!('error' in obj)){															
 					console.log(obj.result);
+                                        $('#msg .modal-body').html(obj.result);
+                                        $('#msg').addClass('success');
+					$('#msg').modal('toggle');
 				}else{
 					console.log(obj.error);
 					$('#msg .modal-body').html(obj.error);
 					$('#msg').addClass('error');
-					$('#msg').modal();
+					$('#msg').modal('toggle');
 					/*$('#msg').html(obj.error);
 					$('#mesaje').modal();*/
 				}
 			}
-		});							
+		}).fail(function(r){
+                    console.log(r);
+                });							
 	});
 	
 	$('#guardar_edit').on('click',function(){
+
+            if (!$(this).is(':visible')){
+                alert('no');
+                return;
+            }
 		var rif = $('#rif').val();
 		var razon_social = $('#razon_social').val();
 		var dir = $('#dir').val();
 		var telefono = $('#telefono').val();
-		var args = {'rif' : rif,'razon_social' : razon_social, 'direccion': dir, 'telefono':telefono}
+		var args = {'rif' : rif,'razon_social' : razon_social, 'direccion': dir, 'telefono':telefono};
 		console.log(args);
 		jQuery.ajax({
 			type: "POST",
@@ -49,7 +61,14 @@ $( document ).ready(function() {
 			success: function (obj, textstatus){
 				if(!('error' in obj)){															
 					console.log(obj.result);
-					console.log(obj.query);
+					
+                                        $('#msg .modal-body').html(obj.result);
+                                        $('#msg').addClass('success');
+					$('#msg').modal('toggle');
+                                        $('#form-cliente')[0].reset();
+                                        $('#guardar_edit').hide('slow');
+                                        $('#guardar').show('slow');
+                                        $('#rif').prop('disabled', false);
 				}else{
 					console.log(obj.error);
 					console.log(obj.query);
@@ -58,10 +77,12 @@ $( document ).ready(function() {
 					$('#msg').modal();					
 				}
 			}
-		});							
+		}).fail(function(r){
+                    console.log(r);
+                });							
 	});
 	
-	$('#guardar').on('click',function(){
+	/*$('#guardar').on('click',function(){
 		var rif = $('#rif').val();
 		var razon_social = $('#razon_social').val();
 		var dir = $('#dir').val();
@@ -86,7 +107,7 @@ $( document ).ready(function() {
 				}
 			}
 		});							
-	});
+	});*/
 	
 	$('#consultar').on('click', function(){
 		console.log('Consultar todos los clientes');

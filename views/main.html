@@ -18,7 +18,7 @@
         
             <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><div><label for="invoice-box">Invoice</label><input type="text" class="form-control" id="invoice-box" /></div></div>
             <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><div><label for="order-box">Order</label><input type="text" class="form-control" id="order-box" /></div></div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><div><label for="fecha-box">Fecha</label><input type="text" class="form-control" id="fecha-box" /></div></div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group"><div><label for="fecha-box">Fecha</label><input type="text" class="form-control" readonly id="fecha-box" /></div></div>
 
 
 
@@ -64,7 +64,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Cantidad</th>
-                                <th>Drescripción</th>
+                                <th>N° Parte</th>
+                                <th>Descripción</th>
                                 <th>Precio Unitario</th>
                                 <th>Total</th>
                             </tr>
@@ -76,25 +77,11 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                                 <td></td>
 
                             </tr>
                             <tr>
                                 <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-
-                            </tr>
-                            <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -108,6 +95,16 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
 
                             </tr>
                             <tr>
@@ -116,9 +113,20 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
 
                             </tr>
                             <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                            </tr>
+                            <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -131,13 +139,24 @@
                     </table></div>
             </div>
             
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group"><label>Total de Productos: </label><input type="text" readonly id="details-products"/></div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="checkbox-inline pull-right form-group">
-                    <label><input max="100" min="0" type="number" value="0"> Descuento en Productos (%)</label>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group"><label>Total de Productos: </label><input type="text" class="form-control" readonly id="details-products"/></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                <div class="form-group-sm">
+                    <label for="porc-desc-txt">Aplicar (%)</label><input max="100" min="0" type="number" class="form-control" id="porc-desc-txt" value="0">     
                 </div>
+              
                 
             </div>
+           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+               <label>Tipo de Acción</label>
+               <div class="radio pu">
+                   <label class="radio-inline"><input type="radio"  checked name="tipoAccion" id="aumento" value="0">Aumento</label>
+                <label class="radio-inline"><input  type="radio" name="tipoAccion" id="descuento" value="0">Descuento</label> 
+               </div>
+               
+            </div>
+            
+            
         </div>
     </div>
     <div class="row">
@@ -146,11 +165,11 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Datos de Contacto</label></div>
             <div class="row marco form-group">
 
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Pie de Pagina</label><input class="form-control" type="text" /></div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Nombre de Contacto</label><input class="form-control" type="text" /></div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Telefono Local</label><input class="form-control" type="text" /></div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Telefono de Oficina</label><input class="form-control" type="text" /></div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Email</label><input class="form-control" type="text" /></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label for="pie-txt">Pie de Pagina</label><input class="form-control" id="pie-txt" type="text" /></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Nombre de Contacto</label><input class="form-control" id="contactName-txt" type="text" /></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Telefono Local</label><input class="form-control" id="tlfLocal-txt" type="text" /></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Telefono de Oficina</label><input class="form-control" id="tlfWork-txt" type="text" /></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><label>Email</label><input class="form-control" id="email-txt" type="email" /></div>
             </div>
         </div>
 

@@ -36,9 +36,10 @@ function getCompanies(id) {
             }
         }
     }).fail(function(r){
+        console.log(r);
             $('#msg .modal-body').html('Error consultando la(s) compañia(s)');
             $('#msg').addClass('success');
-            $('#msg').modal();
+            $('#msg').modal('toggle');
     });
 }
 
@@ -70,13 +71,14 @@ function putCompany() {
               
                 $('#msg .modal-body').html(r.result);
                 $('#msg').addClass('has-success');
-                $('#msg').modal();
+                $('#msg').modal('toggle');
                 $('#form-company')[0].reset();
+                getCompanies();
             } else {
               
                 $('#msg .modal-body').html(r.error);
                 $('#msg').addClass('has-error');
-                $('#msg').modal();
+                $('#msg').modal('toggle');
                 $('#form-company')[0].reset();
             }
         }
@@ -110,22 +112,30 @@ function editCompany() {
         success: function(r){
             
             
-            if (r != false){
+            if (!('error' in r)){
 
                 
-            $('#msg .modal-body').html('Compañia Actualizada.');
+            $('#msg .modal-body').html(r.result);
                 $('#msg').addClass('success');
-                $('#msg').modal();
+                $('#msg').modal('toggle');
                 $('.edi-company').removeClass('edi-company').addClass('cre-company');
                 $('#form-company')[0].reset();
                 getCompanies();
+            } else {
+                
+                 $('#msg .modal-body').html(r.error);
+                $('#msg').addClass('success');
+                $('#msg').modal('toggle');
+                $('.edi-company').removeClass('edi-company').addClass('cre-company');
+                $('#form-company')[0].reset();
+                
             }
         }
     }).fail(function(r){
         console.log(r);
         $('#msg .modal-body').html('Error editing Company.');
                 $('#msg').addClass('error');
-                $('#msg').modal();
+                $('#msg').modal('toggle');
     });
 }
 
@@ -156,21 +166,26 @@ function deleteCompany(id) {
         success: function(r){
             
        
-              if (r != false){
+              if (!('error' in r)){
 
                 
-            $('#msg .modal-body').html('Compañia Eliminada.');
+                $('#msg .modal-body').html(r.result);
                 $('#msg').addClass('success');
-                $('#msg').modal();
-                $('.edi-company').removeClass('edi-company').addClass('cre-company');
-              
+                $('#msg').modal('toggle');
+            
                 getCompanies();
+            } else {
+                $('#msg .modal-body').html(r.error);
+                $('#msg').addClass('success');
+                $('#msg').modal('toggle');
+                
             }
         }
     }).fail(function(r){
-            $('#msg .modal-body').html('Error consultando la(s) compañia(s)');
+            console.log(r);
+            $('#msg .modal-body').html('Error eliminando la(s) compañia(s)');
             $('#msg').addClass('success');
-            $('#msg').modal();
+            $('#msg').modal('toggle');
     });
 }
 
@@ -246,7 +261,7 @@ $(document).ready(function(){
     });
     
      $('body').on('click', '.delete', function(){
-        loadDataEditCompany($(this).parent().parent().attr('id'));
+        deleteCompany($(this).parent().parent().attr('id'));
     });
     
      $('body').on('click', '.find-company', function(){
@@ -265,7 +280,8 @@ $(document).ready(function(){
     $('#form-company').submit(function(){
         console.log('submit');
         if (errorLogo == false){
-            if ($(this).children('.edi-company') !== 'undefined'){
+                 
+            if (!$('#btn-submit').hasClass('cre-company')){
                 editCompany();
             } else {
             putCompany();

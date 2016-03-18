@@ -33,12 +33,12 @@ function putPedido($pedido) {
 							DBManagement::getInstance()->insertar($sql);
 							if(DBManagement::getInstance()->getCountRows() == 1){
                                                             
-								$campo = "num_invoice,qty, descripcion,  precio_unit,  sub_total";						
+								$campo = "num_invoice,qty, num_part, descripcion,  precio_unit,  sub_total";						
                                                                 
                                                                 foreach ($pedido['detalle'] as $detalle) {
                                                                     
                                                                 
-								$valor = "'" . $detalle['num_invoice'] . "','" . $detalle['qty']. "', '".$detalle['descripcion']."', '".preg_replace('/[^0-9.]/','',$detalle['precio_unit'])."', '".preg_replace('/[^0-9.]/','',$detalle['sub_total'])."'";
+								$valor = "'" . $detalle['num_invoice'] . "','" . $detalle['qty']. "', '" . $detalle['numPart']. "',  '".$detalle['descripcion']."', '".preg_replace('/[^0-9.]/','',$detalle['precio_unit'])."', '".preg_replace('/[^0-9.]/','',$detalle['sub_total'])."'";
                                                                 $sql = "insert into DETALLE_PEDIDO (".$campo.") values (".$valor.")";
                                                                // var_dump($sql);
 								DBManagement::getInstance()->insertar($sql);

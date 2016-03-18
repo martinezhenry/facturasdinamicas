@@ -13,7 +13,7 @@ require_once '../core/Configurator.php';
 	Configurator::getInstance();
 
 function getCompanies($id=NULL){
-    if (isset($id)){
+    if (isset($id) && $id != ""){
    $sql = "select a.rif, b.telefono as tlf, a.direccion as dir, a.razon_social as razon, a.rif as id from empresa a, empresa_telefono b where"
            . " a.rif = b.rif and a.rif = '".$id."' limit 1";
     } else {
@@ -57,10 +57,17 @@ function makeLogo($extension) {
 
 function putCompany($company){
     
+    
+    $sql = "select count(rif) as r from empresa where rif='".$company['rif']."'";
+    DBManagement::getInstance()->consultar($sql);
+    $r = DBManagement::getInstance()->getResultSet();
+
+    if ($r[0]['r'] == 0){
+    
    $sql = "insert into empresa (rif, razon_social, direccion, logo, type_logo) values ('".$company['rif']."','".$company['razon']."','".$company['dir']."', ?, '".$company['logoType']."')";
    
    $var[] = makeLogo(explode('.', $company['logoExt'])[1]);
-   //echo $sql;
+
 
    DBManagement::getInstance()->insertar($sql, $var);
    DBManagement::getInstance()->getResultSet();
@@ -83,28 +90,67 @@ function putCompany($company){
        $result['error'] = "NO SE PUEDO REGISTRAR LA EMPRESA.";
    }
        
+    
+    
+    } else {
+        $result['error'] = "LA EMPRESA YA SE ENCUENTRA REGISTRADA.";
+        
+    }
+    
     return json_encode($result);
 }
 
 
 function editCompany($company){
     
-   $sql = "";
+    
+    $valores = "razon_social = '".$company['razon']."', direccion='".$company['dir']."', logo= ?, type_logo='".$company['logoType']."'";
+    $rif = $company['rif'];
+    $sql = "update empresa set $valores where rif = '".$rif."'";
+    
+   //$sql = "insert into empresa (rif, razon_social, direccion, logo, type_logo) values ('".$company['rif']."','".$company['razon']."','".$company['dir']."', ?, '".$company['logoType']."')";
+
+   $var[] = makeLogo(explode('.', $company['logoExt'])[1]);
+
+
+   DBManagement::getInstance()->insertar($sql, $var);
+   //var_dump(DBManagement::getInstance()->getUltError());
    
- 
    
-   return json_decode(true);
+   if(DBManagement::getInstance()->getCountRows() == 1){
+       
+      
+           $result['result'] = "EMPRESA ACTUALIZADA";
+     
+       
+   } else{
+       $result['error'] = "NO SE PUEDO ACTUALIZAR LA EMPRESA.";
+   }
+       
+    
+  
+    
+    return json_encode($result);
     
 }
 
 
 function deleteCompany($id=NULL){
     
-   $sql = "";
+    $sql = "delete from empresa where rif='".$id."'";
+  
+
+   DBManagement::getInstance()->insertar($sql);
+   DBManagement::getInstance()->getResultSet();
    
- 
-   
-   return json_decode(true);
+   if(DBManagement::getInstance()->getCountRows() == 1){
+       
+       $result['result'] = 'EMPRESA ELIMINADA.';
+   } else{
+       $result['error'] = "NO SE PUDO ELIMINAR LA EMPRESA.";
+   }
+       
+    return json_encode($result);
     
 }
 

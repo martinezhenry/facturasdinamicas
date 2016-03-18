@@ -22,6 +22,7 @@
 							$campo = "rif,razon_social,direccion";
 							$valor = "'" . $_POST['arguments']['rif'] . "','" . $_POST['arguments']['razon_social']. "','" . $_POST['arguments']['direccion'] . "'";					
 							$cliente_insert = $obj_bdmysql->insert("CLIENTE", $campo, $valor, $mysqli);
+                                                       
 							if($cliente_insert == 1){
 								$campo = "rif,telefono";						
 								$valor = "'" .  $_POST['arguments']['rif'] . "','" . $_POST['arguments']['telefono'] . "'";
@@ -32,7 +33,7 @@
 									$aResult['error'] = "CLIENTE CREADO CON EXITO PERO, EL TELEFONO NO FUE AGREGADO";
 								}
 							}else{
-								$aResult['error'] = "CREACI�N DE CLIENTE FALLIDA!";
+								$aResult['error'] = "CREACIÓN DE CLIENTE FALLIDA!";
 							}
 						}else{
 							$aResult['error'] = "CLIENTE EXISTENTE!";
@@ -122,7 +123,7 @@
 						$campos ="";
 						$cnt = 0;
 						$arg = 0;
-						$resul = $mysqli->query("SELECT * FROM CLIENTE " . $where);
+						$resul = $mysqli->query("SELECT RIF, RAZON_SOCIAL, DIRECCION FROM CLIENTE " . $where);
 						$r = $resul->fetch_array(MYSQLI_ASSOC);
 						foreach($_POST['arguments'] as $key=>$value){
 							if($key != 'telefono'){
@@ -131,13 +132,31 @@
 									$campos .= $key . "= '" . $value . "'";
 									$arg++;
 								}								
-							}							
+                                                        } else {
+                                                            
+                                                            $camposTlf = "telefono='".$value."'";
+                                                            $arg++;
+                                                            
+                                                            
+                                                        }							
 							$cnt++;
 						}
+                                                
+                                                
+                                                if($camposTlf != ""){
+							$SQL = "UPDATE CLIENTE_TELEFONO SET " . $camposTlf . " " . $where;
+							if($mysqli->query($SQL)){
+								$tlf = true;
+							}else{
+								$tlf = false;
+							}
+							
+						}
+                                                
 						if($campos != ""){
 							$SQL = "UPDATE CLIENTE SET " . $campos . " " . $where;
 							if($mysqli->query($SQL)){
-								$aResult['result'] = "DATOS ACTUALIZADOS SATISFACTORIAMENTE " . $campos;
+								$aResult['result'] = "DATOS ACTUALIZADOS SATISFACTORIAMENTE " ;
 								$aResult['query'] = $SQL;
 							}else{
 								$aResult['error'] = "NO SE PUDO ACTUALIZAR EL CLIENTE"; 
@@ -145,7 +164,15 @@
 							}
 							
 						}else{
+                                                    if ($camposTlf == ""){
 							$aResult['error'] = "NINGUN CAMPO CAMBIADO!"; 
+                                                    } else {
+                                                        if ($tlf){
+                                                        $aResult['result'] = "DATOS ACTUALIZADOS SATISFACTORIAMENTE " ;
+                                                        } else {
+                                                           $aResult['error'] = "NO SE PUDO ACTUALIZAR EL CLIENTE"; 
+                                                        }
+                                                    }
 						}
 						
 						
