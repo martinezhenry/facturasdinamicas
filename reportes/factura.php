@@ -160,6 +160,7 @@
 	
 	function put_header($pdf,$tipo_fact){
             global $ship, $date, $invoice, $page, $order, $rifEmp, $imgType, $totalPag, $razonEmp, $dirEmp, $tlfEmp, $id, $terms, $incomeTerms, $via;
+
            if (!isset($_SERVER['HTTP_REFERER'])){
               $ruta = "http://". $_SERVER['SERVER_NAME'].'/facturas/';
            } else {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php	
 	header('Content-Type: application/json');
 include '../common/general.php';
@@ -213,4 +214,5 @@ break;
 }
 }
 echo json_encode($aResult);
+
 ?>
