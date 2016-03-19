@@ -495,7 +495,15 @@ $(document).ready(function () {
     });
 
 
-    $('#fecha-box').datepicker({dateFormat: 'dd/mm/yy'});
+    $('#fecha-box').datepicker({dateFormat: 'dd/mm/yy',
+        beforeShow:function(input) {
+        $('#fecha-box').css({
+            "position": "relative",
+            "z-index": 999999
+        });
+    }
+
+});
 
     $('#generar-pedido').on('click', function () {
         putPedido();
@@ -524,6 +532,8 @@ $(document).ready(function () {
       calculateTotal()
 
    });
+
+    $('#fecha-box').css('z-index', '9999');
 
 });
 
