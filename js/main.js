@@ -72,7 +72,7 @@ function refreshProducts() {
                     html += "<td>" + value.cant + "</td>";
                     html += "<td>" + value.numPart + "</td>";
                     html += "<td>" + value.desc + "</td>";
-                    html += "<td class='"+value.prec+"'>" + value.prec + "</td>";
+                    html += "<td class='"+value.prec+"'> <input class='form-control' type='text' value='"+ value.prec +"'</td>";
                     html += "<td>" + value.total + "</td>";
                     // html += "<td><a class='edit icon'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a><a class='delete'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></td>";
                     html += "</tr>";
@@ -81,9 +81,7 @@ function refreshProducts() {
                 $('#products tbody').html(html);
                 $('#details-products').val(count);
                 $('#sub-total-txt').val(subTotal.formatMoney(2, '.', ','));
-                montoDescuento = parseFloat(subTotal - descuento);
-                console.log(montoDescuento);
-                $('#total-txt').val((montoDescuento + parseFloat((montoDescuento * impuesto) / 100)).formatMoney(2, '.', ','));
+                calculateTotal();
             }
         }
 
@@ -198,6 +196,9 @@ console.log($('#emp-box').val());
         piePag.tlfLocal = $('#tlfLocal-txt').val();
         piePag.tlfWork = $('#tlfWork-txt').val();
         piePag.email = $('#email-txt').val();
+        piePag.via = $('#via-txt').val();
+        piePag.terms = $('#terms-txt').val();
+        piePag.incomeTerms = $('#incomeTerms-txt').val();
         
         
         piePag = JSON.stringify(piePag);
@@ -292,15 +293,40 @@ function calculateTotal(){
     
     var impuesto = parseInt($('#impuesto-txt').val());
     var descuento = parseFloat($('#descuento-txt').val().replace(',',''));
+    var carga = parseFloat($('#carga-txt').val().replace(',',''));
+    var entrega = parseFloat($('#entrega-txt').val().replace(',',''));
+    var reposicion = parseFloat($('#repo-txt').val().replace(',',''));
     
      if ($('#descuento-txt').val() == ""){
          descuento = 0.0;
         
      }
-    var montoDescuento = 0.0;
+
+     if ($('#impuesto-txt').val() == ""){
+         impuesto = 0.0;
+        
+     }
+
+     if ($('#carga-txt').val() == ""){
+         carga = 0.0;
+        
+     }
+
+     if ($('#entrega-txt').val() == ""){
+         entrega = 0.0;
+        
+     }
+
+     if ($('#repo-txt').val() == ""){
+         reposicion = 0.0;
+        
+     }
+
+    var montoDescuento = 0.0, final = 0.0;
     var subTotal =parseFloat($('#sub-total-txt').val().replace(',',''));
     montoDescuento = parseFloat(subTotal - descuento);
-    $('#total-txt').val((montoDescuento + parseFloat((montoDescuento * impuesto) / 100)).formatMoney(2, '.', ','));
+    final = montoDescuento + carga + entrega + reposicion
+    $('#total-txt').val((final + parseFloat((final * impuesto) / 100)).formatMoney(2, '.', ','));
 }
 
 
@@ -351,7 +377,7 @@ function aplicateDiscount(){
          
                    // $('#products tbody').html(html);
                   //  $('#details-products').val(count);
-                   $(this).children('td').eq(4).text(parseFloat(producto).formatMoney(2, '.', ','));
+                   $(this).children('td').eq(4).find('input').val(parseFloat(producto).formatMoney(2, '.', ','));
                    $(this).children('td').eq(5).text(valorFinal.formatMoney(2, '.', ','));
 
     });
@@ -368,6 +394,8 @@ $(document).ready(function () {
 
 //$(":file").filestyle();
 
+//var editActivated = false;
+
 
 
     $('body').on('click', '.edit', function () {
@@ -383,9 +411,31 @@ $(document).ready(function () {
     });
     
 
-    $('#products tbody tr').find('td').eq(4).dblclick(function (){
-        alert($(this).attr('class'));
+    $('body').on('dblclick','#products tbody tr td:nth-child(5)',function (){
+           
+        //   if (!editActivated){
+         //  var texto = $(this).text();
+         //  var input = "<input type='text' class='txt-edit-price' value='"+texto+"'/>";
+//input = '<div class="input-group input-group-sm"> <span class="input-group-btn"> <button class="btn btn-default" id="ok-edit-txt" type="button">Ok</button> </span> <input id="txt-edit-price" type="text" class="form-control" value="'+texto+'"> </div>';
+
+       //    $(this).html(input);
+        //   editActivated = true;
+     //  }
+             
+           //$(this).text($(this).find('.txt-edit-price').val());
+           //$(this).find('.txt-edit-price').val('');
+           //$(this).find('.txt-edit-price').hide('slow');
+          
+
     });
+
+    $('body').on('click','#ok-edit-txt',function (){
+
+    //  $(this).parent().parent().parent('td').text($('#txt-edit-price').val());
+    //  editActivated = false;
+
+     });
+
 
     $('#infile').change(loadFile);
 
@@ -404,7 +454,7 @@ $(document).ready(function () {
     
     
     $('#impuesto-txt').change(calculateTotal);
-    $('#descuento-txt').keyup(calculateTotal);
+    $('#descuento-txt, #repo-txt, #carga-txt, #entrega-txt, #impuesto-txt').keyup(calculateTotal);
 
 
 
