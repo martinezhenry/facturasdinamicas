@@ -144,7 +144,9 @@ function deleteCompany($id=NULL){
    DBManagement::getInstance()->getResultSet();
    
    if(DBManagement::getInstance()->getCountRows() == 1){
-       
+           $sql = "delete from empresa_telefono where rif='".$id."'";
+            DBManagement::getInstance()->insertar($sql);
+   
        $result['result'] = 'EMPRESA ELIMINADA.';
    } else{
        $result['error'] = "NO SE PUDO ELIMINAR LA EMPRESA.";

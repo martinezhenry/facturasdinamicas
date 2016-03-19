@@ -1,4 +1,42 @@
 
+
+function deleteCliente(id){
+    var args = {'rif' : id};
+    jQuery.ajax({
+			type: "POST",
+			url: 'controller/crud.php',
+			dataType: 'json',
+			data: {functionname: 'eliminar_cliente', arguments:args},
+			success: function (obj, textstatus){
+                            console.log(obj);
+				if(!('error' in obj)){															
+					console.log(obj.result);
+                                        $('#msg .modal-body').html(obj.result);
+                                        $('#msg').addClass('success');
+					$('#msg').modal('toggle');
+                                        
+				}else{
+                                    //console.log(id.lenght);
+                                    
+					console.log(obj.error);
+					$('#msg .modal-body').html(obj.error);
+					$('#msg').addClass('error');
+					$('#msg').modal('toggle');
+                                        
+                                
+					/*$('#msg').html(obj.error);
+					$('#mesaje').modal();*/
+				}
+                                $('#consultar').click();
+			}
+		}).fail(function(r){
+                    console.log(r);
+                });	
+    
+    
+}
+
+
 $( document ).ready(function() {
     console.log( "ready!" );	
 	$('#guardar_edit').hide();
@@ -27,6 +65,7 @@ $( document ).ready(function() {
                                         $('#msg .modal-body').html(obj.result);
                                         $('#msg').addClass('success');
 					$('#msg').modal('toggle');
+                                        $('#consultar').click();
 				}else{
 					console.log(obj.error);
 					$('#msg .modal-body').html(obj.error);
@@ -208,11 +247,15 @@ $( document ).ready(function() {
                                                 
 						/*$('#razon_social').val = "HOLA";*/
 					}else{
+                                            
+                                            if (typeof(id) !== "undefined"){
 						console.log(obj.error);	
 						console.log(obj.query);
 						$('#msg .modal-body').html(obj.error);
 						$('#msg').addClass('error');
 						$('#msg').modal();
+                                            }
+                                            $('#customers tbody').html("");
 					}
 				}
 			}).fail(function(r){
@@ -230,6 +273,12 @@ $( document ).ready(function() {
         });
         
         $('#consultar').click();
+        
+        $('body').on('click', '.delete-cus', function(){
+            deleteCliente($(this).parent().parent().attr('id'));
+        });
+        
+        
         
         
         

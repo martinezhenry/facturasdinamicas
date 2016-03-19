@@ -37,10 +37,10 @@ define('DBUSER3', 'v1131055_inv001');
 define('DBPASS3', 'lW5Oa7NP0#$}'); 
 define('DBNOM3', 'v1131055_invoices');
 */
-define('DBHOST3', 'localhost'); 
-define('DBUSER3', 'root'); 
-define('DBPASS3', ''); 
-define('DBNOM3', 'facturas');
+define('DBHOST3', 'mysql.hostinger.es'); 
+define('DBUSER3', 'u429736889_factu'); 
+define('DBPASS3', 'facturas@'); 
+define('DBNOM3', 'u429736889_factu');
 
 //INCLUDES
 //
