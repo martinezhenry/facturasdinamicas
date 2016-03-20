@@ -46,6 +46,7 @@ function putPedido($pedido) {
                                                                 }
 							}else{
 								$aResult['error'] = "CREACION DE PEDIDO FALLIDA!";
+								$aResult['error'] = "CREACION DE PEDIDO FALLIDA!" .$sql;
 							}
 					
 							

@@ -57,8 +57,9 @@ function refreshProducts() {
                 var count = 0;
                 var subTotal = 0.0;
                 var total = 0.0;
-                var impuesto = parseInt($('#impuesto-txt').val());
-                var descuento = parseFloat($('#descuento-txt').val());
+               // var impuesto = parseInt($('#impuesto-txt').val());
+               // var descuento = parseFloat($('#descuento-txt').val());
+               var impuesto =0, descuento=0.0;
                 console.log(descuento);
                 console.log(impuesto);
                 var montoDescuento = 0.0;
@@ -72,15 +73,15 @@ function refreshProducts() {
                     html += "<td>" + value.cant + "</td>";
                     html += "<td>" + value.numPart + "</td>";
                     html += "<td>" + value.desc + "</td>";
-                    html += "<td class='"+value.prec+"'> <input class='form-control edit-edit-price' type='text' value='"+ value.prec +"'</td>";
-                    html += "<td>" + value.total + "</td>";
+                    html += "<td class='"+value.prec+"'> <input class='form-control edit-edit-price' type='text' value='$"+ (value.prec).replace(new RegExp(/[^0-9.]/,'g'),'') +"'</td>";
+                    html += "<td>$" + value.total + "</td>";
                     // html += "<td><a class='edit icon'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a><a class='delete'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></td>";
                     html += "</tr>";
 
                 });
                 $('#products tbody').html(html);
                 $('#details-products').val(count);
-                $('#sub-total-txt').val(subTotal.formatMoney(2, '.', ','));
+                $('#sub-total-txt').val('$'+subTotal.formatMoney(2, '.', ','));
                 calculateTotal();
             }
         }
@@ -167,11 +168,11 @@ console.log($('#emp-box').val());
         pedido.cliente_rif = $('#rif-txt').val();
         pedido.empresa_rif = $('#emp-box').val();
         pedido.sub_total = $('#sub-total-txt').val();
-        pedido.sale_tax = $('#impuesto-txt').val();
-        pedido.discount = $('#descuento-txt').val();
-        pedido.freight = $('#carga-txt').val();
-        pedido.handling = $('#entrega-txt').val();
-        pedido.restocking = $('#repo-txt').val();
+        pedido.sale_tax = 0;
+        pedido.discount = 0;
+        pedido.freight = $('#entrega-txt').val().replace(new RegExp(/[^0-9.]/,'g'),'');
+        pedido.handling = 0;
+        pedido.restocking = $('#repo-txt').val().replace(new RegExp(/[^0-9.]/,'g'),'');
         pedido.total_sale = $('#total-txt').val();
         pedido.detalle = [];
         var detalle = new Object();
@@ -233,9 +234,9 @@ console.log($('#emp-box').val());
                     $('#msg').modal('toggle');
                 }
             }
-        }).fail(function (r) {
+        }).fail(function (r, msg) {
             $('#msg .modal-body').html('Error creating Pedido');
-            console.log('error: ' + r);
+            console.log('error: ' + msg);
         });
     }
 }
@@ -291,55 +292,49 @@ function findCustomer() {
 function calculateTotal(){
     
     
-    var impuesto = parseInt($('#impuesto-txt').val());
-    var descuento = parseFloat($('#descuento-txt').val().replace(',',''));
-    var carga = parseFloat($('#carga-txt').val().replace(',',''));
-    var entrega = parseFloat($('#entrega-txt').val().replace(',',''));
-    var reposicion = parseFloat($('#repo-txt').val().replace(',',''));
+    //var impuesto = parseInt($('#impuesto-txt').val());
+    //var descuento = parseFloat($('#descuento-txt').val().replace(',',''));
+    //var carga = parseFloat($('#carga-txt').val().replace(',',''));
+    var entrega = (($('#entrega-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
+    var insurance = (($('#repo-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
     
-     if ($('#descuento-txt').val() == ""){
-         descuento = 0.0;
-        
-     }
+    console.log(entrega);
+    console.log(insurance);
 
-     if ($('#impuesto-txt').val() == ""){
-         impuesto = 0.0;
-        
-     }
-
-     if ($('#carga-txt').val() == ""){
-         carga = 0.0;
-        
-     }
-
-     if ($('#entrega-txt').val() == ""){
+     if (entrega == ""){
          entrega = 0.0;
         
+     } else {
+        entrega = parseFloat(entrega);
      }
 
-     if ($('#repo-txt').val() == ""){
-         reposicion = 0.0;
+     if (insurance == ""){
+         insurance = 0.0;
         
+     } else {
+        insurance = parseFloat(insurance);
      }
-
+    var descuento = 0.0, carga=0.0;
+    var impuesto = 0;
     var montoDescuento = 0.0, final = 0.0;
-    var subTotal =parseFloat($('#sub-total-txt').val().replace(',',''));
+    var subTotal =parseFloat(($('#sub-total-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
     montoDescuento = parseFloat(subTotal - descuento);
-    final = montoDescuento + carga + entrega + reposicion
-    $('#total-txt').val((final + parseFloat((final * impuesto) / 100)).formatMoney(2, '.', ','));
+    final = montoDescuento + carga + entrega + insurance
+    $('#total-txt').val('$'+(final + parseFloat((final * impuesto) / 100)).formatMoney(2, '.', ','));
 }
 
 
 function aplicateDiscount(){
     
     
-    var porcentaje = $('#porc-desc-txt').val();
+    var porcentaje = parseInt(($('#porc-desc-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
     var subTotal = 0.0;
     var valor;
     var valorFinal;
-    var impuesto = parseInt($('#impuesto-txt').val());
-    var descuento = parseFloat($('#descuento-txt').val());
-   
+   // var impuesto = parseInt($('#impuesto-txt').val());
+   // var descuento = parseFloat($('#descuento-txt').val());
+   var impuesto = 0;
+   var descuento = 0;
     
     var montoDescuento = 0.0;
     var cantidad=0;
@@ -351,8 +346,8 @@ function aplicateDiscount(){
                     
                     //console.log(subTotal);
                     //console.log($(this).children('td').eq(4).text() + "----");
-                    cantidad = ($(this).children('td').eq(1).text()).replace(/[^0-9]/, '');
-                    producto = parseFloat((($(this).children('td').eq(4).attr('class')).replace(',','')).replace(/[^0-9.]/, ''));
+                    cantidad = ($(this).children('td').eq(1).text()).replace(new RegExp(/[^0-9.]/,'g'), '');
+                    producto = parseFloat((($(this).children('td').eq(4).attr('class')).replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
                     valor = cantidad * producto;
                     //valor = valor.replace(',','');
                     //valor = valor.replace(/[^0-9.]/, '');
@@ -377,15 +372,16 @@ function aplicateDiscount(){
          
                    // $('#products tbody').html(html);
                   //  $('#details-products').val(count);
-                   $(this).children('td').eq(4).find('input').val(parseFloat(producto).formatMoney(2, '.', ','));
-                   $(this).children('td').eq(5).text(valorFinal.formatMoney(2, '.', ','));
+                   $(this).children('td').eq(4).find('input').val('$'+parseFloat(producto).formatMoney(2, '.', ','));
+                   $(this).children('td').eq(5).text('$'+valorFinal.formatMoney(2, '.', ','));
 
     });
     
-                    $('#sub-total-txt').val(subTotal.formatMoney(2, '.', ','));
-                    montoDescuento = parseFloat(subTotal - descuento);
+                    $('#sub-total-txt').val('$'+subTotal.formatMoney(2, '.', ','));
+                    calculateTotal();
+                   // montoDescuento = parseFloat(subTotal - descuento);
                   //  console.log(montoDescuento);
-                    $('#total-txt').val((montoDescuento + parseFloat((montoDescuento * impuesto) / 100)).formatMoney(2, '.', ','));
+                   // $('#total-txt').val((montoDescuento + parseFloat((montoDescuento * impuesto) / 100)).formatMoney(2, '.', ','));
                 
 }
 
@@ -397,9 +393,9 @@ function calculateSubtotal(){
     var subTotal = 0.0;
     var valor;
     var valorFinal;
-    var impuesto = parseInt($('#impuesto-txt').val());
-    var descuento = parseFloat($('#descuento-txt').val());
-   
+   // var impuesto = parseInt($('#impuesto-txt').val());
+   // var descuento = parseFloat($('#descuento-txt').val());
+   var impuesto = 0, descuento = 0.0;
     
     var montoDescuento = 0.0;
     var cantidad=0;
@@ -411,13 +407,13 @@ function calculateSubtotal(){
                     
                     //console.log(subTotal);
                     //console.log($(this).children('td').eq(4).text() + "----");
-                    cantidad = parseInt(($(this).children('td').eq(1).text()).replace(/[^0-9]/, ''));
-                    producto = parseFloat((($(this).children('td').eq(4).find('input').val()).replace(',','')).replace(/[^0-9.]/, ''));
+                    cantidad = parseInt(($(this).children('td').eq(1).text()).replace(new RegExp(/[^0-9.]/,'g'), ''));
+                    producto = parseFloat((($(this).children('td').eq(4).find('input').val()).replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
                     valor = cantidad * producto;
                     //valor = valor.replace(',','');
                     //valor = valor.replace(/[^0-9.]/, '');
                     //console.log(valor);
-                      valorFinal= (($(this).children('td').eq(5).text()).replace(',','')).replace(/[^0-9.]/, '');
+                      valorFinal= (($(this).children('td').eq(5).text()).replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), '');
                 subTotal = (parseFloat(subTotal) + parseFloat((valorFinal)));
                 
          
@@ -428,7 +424,7 @@ function calculateSubtotal(){
 
     });
     
-                    $('#sub-total-txt').val(subTotal.formatMoney(2, '.', ','));
+                    $('#sub-total-txt').val('$'+subTotal.formatMoney(2, '.', ','));
                   //  montoDescuento = parseFloat(subTotal - descuento);
                   //  console.log(montoDescuento);
                  //   $('#total-txt').val((montoDescuento + parseFloat((montoDescuento * impuesto) / 100)).formatMoney(2, '.', ','));
@@ -516,19 +512,19 @@ $(document).ready(function () {
 
     $('body').on('keyup', '#products tbody tr .edit-edit-price',function(){
        console.log('recalcule-price-edit');
-       var producto = parseFloat(($(this).val()).replace(',','').replace(/[^0-9.]/, ''));
+       var producto = parseFloat(($(this).val()).replace(',','').replace(new RegExp(/[^0-9.]/,'g'), ''));
        console.log(producto);
-       if (($(this).val()).replace(',','').replace(/[^0-9.]/, '') == ""){
+       if (($(this).val()).replace(',','').replace(new RegExp(/[^0-9.]/,'g'), '') == ""){
     producto =0.0;
 }
 
-       var cantidad = parseInt(($(this).parent().siblings().eq(1).text()).replace(/[^0-9]/, ''));
+       var cantidad = parseInt(($(this).parent().siblings().eq(1).text()).replace(new RegExp(/[^0-9.]/,'g'), ''));
        console.log(cantidad);
 
        var final = (cantidad * producto);
        console.log(final);
 
-       $(this).parent().siblings().eq(4).text((final).formatMoney(2, '.', ','));
+       $(this).parent().siblings().eq(4).text('$'+(final).formatMoney(2, '.', ','));
       calculateSubtotal();
       calculateTotal()
 

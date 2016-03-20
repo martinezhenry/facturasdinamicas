@@ -1,5 +1,6 @@
 <?php
 	include '../tools/class_fpdf.php';
+    require_once '../tools/numberToWords.php';
 	include '../common/general.php';
         require_once '../core/DBManagement.php';
         require_once '../core/DBInspector.php';
@@ -162,13 +163,13 @@
             global $ship, $date, $invoice, $page, $order, $rifEmp, $imgType, $totalPag, $razonEmp, $dirEmp, $tlfEmp, $id, $terms, $incomeTerms, $via;
 
            if (!isset($_SERVER['HTTP_REFERER'])){
-              $ruta = "http://". $_SERVER['SERVER_NAME'].'/facturas/';
+              $ruta = "http://". $_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].'/facturas/';
            } else {
                $ruta = $_SERVER['HTTP_REFERER'];
            }
 		switch($tipo_fact){
 			case "A":
-				$pdf->Image($ruta.'tools/readImg.php?e='.$rifEmp,90,5,45,35,$imgType);	
+				$pdf->Image($ruta.'tools/readImg.php?e='.$rifEmp,90,5,45,30,$imgType);	
                                 //$pdf->MemImage('../tools/readImg.php?e='.$invoice, 50, 30);
 				$pdf->SetXY(15,10);
                                 //$pdf->SetFont('Arial','B',12);
@@ -181,7 +182,7 @@
 				//$pdf->Multicell(50,5,utf8_decode($tlfEmp),1,'',FALSE);
 				break;
 			case "B":
-				$pdf->Image($ruta.'tools/readImg.php?e='.$rifEmp,155,5,45,35,$imgType);
+				$pdf->Image($ruta.'tools/readImg.php?e='.$rifEmp,155,5,45,30,$imgType);
 				//$pdf->SetFont('Arial','B',12);
 				$pdf->SetXY(15,10);
 				$pdf->Multicell(100,5,utf8_decode($razonEmp. "\n". $dirEmp . "\n". $tlfEmp),'','',FALSE);
@@ -231,48 +232,50 @@
 		$pdf->SetXY(175,40);
 		$pdf->Multicell(30,5,utf8_decode($invoice),1,'C',FALSE);
 		
-		$pdf->SetXY(15,50);
+		$pdf->SetXY(15,47);
                 $pdf->SetFont('Arial','B',8);
                 $pdf->Multicell(85,4,utf8_decode('BILL TO:'),0,'',FALSE);
                 $pdf->SetFont('Arial','',8);
-                $pdf->SetXY(15,54);
+                $pdf->SetXY(15,51);
 		$pdf->Multicell(85,4,utf8_decode('' . $ship),0,'',FALSE);
-		$pdf->SetXY(120,50);
+		$pdf->SetXY(120,47);
                 $pdf->SetFont('Arial','B',8);
 		$pdf->Multicell(85,4,utf8_decode('SHIP TO:'),0,'',FALSE);
                 $pdf->SetFont('Arial','',8);
-                $pdf->SetXY(120,54);
+                $pdf->SetXY(120,51);
                 $pdf->Multicell(85,4,utf8_decode('' . $ship),0,'',FALSE);
 
                 $pdf->SetFont('Arial','B',8);
-                $pdf->SetXY(15, 65);
+                $myY = $pdf->GetY()+2;
+                $pdf->SetXY(15, $myY);
 		$pdf->Multicell(63,5,utf8_decode('Ship Port'),1,'C',FALSE);
-		$pdf->SetXY(78,65);
+		$pdf->SetXY(78,$myY);
 		$pdf->Multicell(63,5,utf8_decode('IncomeTerms'),1,'C',FALSE);
-		$pdf->SetXY(141,65);
-		$pdf->Multicell(63,5,utf8_decode('Terms'),1,'C',FALSE);
+		$pdf->SetXY(141,$myY);
+		$pdf->Multicell(64,5,utf8_decode('Terms'),1,'C',FALSE);
 
                 $pdf->SetFont('Arial','',8);
-                $pdf->SetXY(15, 70);
+                $pdf->SetXY(15, $myY+5);
 		$pdf->Multicell(63,5,utf8_decode($via),1,'C',FALSE);
-		$pdf->SetXY(78,70);
+		$pdf->SetXY(78,$myY+5);
 		$pdf->Multicell(63,5,utf8_decode($incomeTerms),1,'C',FALSE);
-		$pdf->SetXY(141,70);
-		$pdf->Multicell(63,5,utf8_decode($terms),1,'C',FALSE);
+		$pdf->SetXY(141,$myY+5);
+		$pdf->Multicell(64,5,utf8_decode($terms),1,'C',FALSE);
 
 
 	}
 	
 	function put_t_header($pdf){
-		$pdf->SetXY(15,80);
+        $myY = $pdf->GetY();
+		$pdf->SetXY(15,$myY+3);
 		$pdf->Multicell(8,5,utf8_decode('QTY'),1,'',FALSE);
-                $pdf->SetXY(23,80);
-		$pdf->Multicell(30,5,utf8_decode('Num. Part'),1,'C',FALSE);
-		$pdf->SetXY(53,80);
+                $pdf->SetXY(23,$myY+3);
+		$pdf->Multicell(30,5,utf8_decode('PartNo'),1,'C',FALSE);
+		$pdf->SetXY(53,$myY+3);
 		$pdf->Multicell(112,5,utf8_decode('Description'),1,'C',FALSE);
-		$pdf->SetXY(165,80);
+		$pdf->SetXY(165,$myY+3);
 		$pdf->Multicell(20,5,utf8_decode('UnitPrice'),1,'C',FALSE);
-		$pdf->SetXY(185,80);
+		$pdf->SetXY(185,$myY+3);
 		$pdf->Multicell(20,5,utf8_decode('Total'),1,'C',FALSE);
 	}
         
@@ -303,35 +306,35 @@
 	put_t_header($pdf);
 	
 	$x_pos = 15;
-	$y_pos = 85;	
+	$y_pos = $pdf->GetY();	
 	
 	$t_items = 100;
 	$c_item = 0;
 	for($i=0;$i<count($result);$i++){
 		
-		if($c_item== 35){
+		if($c_item== 34){
                         $page++;
 			$pdf->AddPage();
 			put_header($pdf, $tipo_fact);
 			put_t_header($pdf);			
-			$y_pos = 85;
+			$y_pos = $pdf->GetY();
 			$c_item=0;
 		}
 		
 		$pdf->SetXY($x_pos,$y_pos);
-		$pdf->Multicell(8,5,utf8_decode($result[$i]['qty']),1,'',FALSE);
+		$pdf->Multicell(8,5,utf8_decode($result[$i]['qty']),1,'C',FALSE);
 		
 		$pdf->SetXY($x_pos + 8,$y_pos);
 		$pdf->Multicell(30,5,utf8_decode($result[$i]['num_part']),1,'C',FALSE);
 
                 $pdf->SetXY($x_pos + 38,$y_pos);
-		$pdf->Multicell(112,5,utf8_decode($result[$i]['descripcion']),1,'C',FALSE);
+		$pdf->Multicell(112,5,utf8_decode($result[$i]['descripcion']),1,'L',FALSE);
 		
 		$pdf->SetXY($x_pos + 150,$y_pos);		
-		$pdf->Multicell(20,5,utf8_decode('$'.$result[$i]['precio_unit']),1,'C',FALSE);
+		$pdf->Multicell(20,5,utf8_decode('$'.$result[$i]['precio_unit']),1,'R',FALSE);
 		
 		$pdf->SetXY($x_pos + 170,$y_pos);
-		$pdf->Multicell(20,5,utf8_decode('$'.$result[$i]['sub_totalP']),1,'C',FALSE);
+		$pdf->Multicell(20,5,utf8_decode('$'.$result[$i]['sub_totalP']),1,'R',FALSE);
 		$y_pos += 5;
 		$c_item++;
 	}
@@ -353,8 +356,10 @@
                 $y_pos += 5;
                 $pdf->Multicell(150,5,utf8_decode('Special Notes'),1,'C',FALSE);
                 $pdf->SetXY(15,$y_pos);
+                $pdf->Line(15,$y_pos,15,$y_pos+20);
                 $y_pos += 20;
-		$pdf->Multicell(150,20,utf8_decode($piePag),1,'',FALSE);
+                
+		$pdf->Multicell(150,5,substr('Values are in US dollars: '.convert_number_to_words($totalSale)."\n". utf8_decode($piePag),0,390),0,'L',FALSE);
 		$pdf->SetXY(15,$y_pos);
                 $y_pos += 5;
 		$pdf->Multicell(40,5,utf8_decode('Contact Name'),1,'C',FALSE);
@@ -382,36 +387,36 @@
                 $pdf->SetXY(185,$yOrg);
                 $pdf->Multicell(20,5,utf8_decode('$'.$subTotal),1,'R',FALSE);
                 $yOrg += 5;
+               // $pdf->SetXY(165,$yOrg);
+                //$pdf->Multicell(20,5,utf8_decode('Sales Tax'),1,'R',FALSE);
+               // $pdf->SetXY(185,$yOrg);
+               // $pdf->Multicell(20,5,utf8_decode('$'.$salesTax),1,'R',FALSE);
+               // $yOrg += 5;
+               // $pdf->SetXY(165,$yOrg);
+               // $pdf->Multicell(20,5,utf8_decode('Discount'),1,'R',FALSE);
+               // $pdf->SetXY(185,$yOrg);
+               // $pdf->Multicell(20,5,utf8_decode('$'.$discount),1,'R',FALSE);
+               // $yOrg += 5;
                 $pdf->SetXY(165,$yOrg);
-                $pdf->Multicell(20,5,utf8_decode('Sales Tax'),1,'R',FALSE);
+                $pdf->Multicell(20,10,utf8_decode('Freight'),1,'R',FALSE);
                 $pdf->SetXY(185,$yOrg);
-                $pdf->Multicell(20,5,utf8_decode('$'.$salesTax),1,'R',FALSE);
-                $yOrg += 5;
+                $pdf->Multicell(20,10,utf8_decode('$'.$freight),1,'R',FALSE);
+                $yOrg += 10;
+               // $pdf->SetXY(165,$yOrg);
+               // $pdf->Multicell(20,5,utf8_decode('Handling'),1,'R',FALSE);
+               // $pdf->SetXY(185,$yOrg);
+               // $pdf->Multicell(20,5,utf8_decode('$'.$handling),1,'R',FALSE);
+               // $yOrg += 5;
                 $pdf->SetXY(165,$yOrg);
-                $pdf->Multicell(20,5,utf8_decode('Discount'),1,'R',FALSE);
+                $pdf->Multicell(20,10,utf8_decode('Insurance'),1,'R',FALSE);
                 $pdf->SetXY(185,$yOrg);
-                $pdf->Multicell(20,5,utf8_decode('$'.$discount),1,'R',FALSE);
-                $yOrg += 5;
-                $pdf->SetXY(165,$yOrg);
-                $pdf->Multicell(20,5,utf8_decode('Freight'),1,'R',FALSE);
-                $pdf->SetXY(185,$yOrg);
-                $pdf->Multicell(20,5,utf8_decode('$'.$freight),1,'R',FALSE);
-                $yOrg += 5;
-                $pdf->SetXY(165,$yOrg);
-                $pdf->Multicell(20,5,utf8_decode('Handling'),1,'R',FALSE);
-                $pdf->SetXY(185,$yOrg);
-                $pdf->Multicell(20,5,utf8_decode('$'.$handling),1,'R',FALSE);
-                $yOrg += 5;
-                $pdf->SetXY(165,$yOrg);
-                $pdf->Multicell(20,5,utf8_decode('Restocking'),1,'R',FALSE);
-                $pdf->SetXY(185,$yOrg);
-                $pdf->Multicell(20,5,utf8_decode('$'.$restoking),1,'R',FALSE);
+                $pdf->Multicell(20,10,utf8_decode('$'.$restoking),1,'R',FALSE);
                 
-                $yOrg += 5;
+                $yOrg += 10;
                 $pdf->SetXY(165,$yOrg);
-                $pdf->Multicell(20,5,utf8_decode('Total Sale'),1,'R',FALSE);
+                $pdf->Multicell(20,10,utf8_decode('Total Sale'),1,'R',FALSE);
                 $pdf->SetXY(185,$yOrg);
-                $pdf->Multicell(20,5,utf8_decode('$'.$totalSale),1,'R',FALSE);
+                $pdf->Multicell(20,10,utf8_decode('$'.$totalSale),1,'R',FALSE);
 		
                 
 

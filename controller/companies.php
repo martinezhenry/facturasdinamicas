@@ -87,7 +87,7 @@ function putCompany($company){
        }
        
    } else{
-       $result['error'] = "NO SE PUEDO REGISTRAR LA EMPRESA.";
+       $result['error'] = "NO SE PUDO REGISTRAR LA EMPRESA.";
    }
        
     
@@ -124,7 +124,7 @@ function editCompany($company){
      
        
    } else{
-       $result['error'] = "NO SE PUEDO ACTUALIZAR LA EMPRESA.";
+       $result['error'] = "NO SE PUDO ACTUALIZAR LA EMPRESA.";
    }
        
     

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php	
 	header('Content-Type: application/json');
 include '../common/general.php';
