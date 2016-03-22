@@ -268,11 +268,11 @@
 	function put_t_header($pdf){
         $myY = $pdf->GetY();
 		$pdf->SetXY(15,$myY+3);
-		$pdf->Multicell(8,5,utf8_decode('QTY'),1,'',FALSE);
-                $pdf->SetXY(23,$myY+3);
+		$pdf->Multicell(14,5,utf8_decode('QTY'),1,'C',FALSE);
+                $pdf->SetXY(29,$myY+3);
 		$pdf->Multicell(30,5,utf8_decode('PartNo'),1,'C',FALSE);
-		$pdf->SetXY(53,$myY+3);
-		$pdf->Multicell(112,5,utf8_decode('Description'),1,'C',FALSE);
+		$pdf->SetXY(59,$myY+3);
+		$pdf->Multicell(106,5,utf8_decode('Description'),1,'C',FALSE);
 		$pdf->SetXY(165,$myY+3);
 		$pdf->Multicell(20,5,utf8_decode('UnitPrice'),1,'C',FALSE);
 		$pdf->SetXY(185,$myY+3);
@@ -323,13 +323,13 @@
 		}
 		
 		$pdf->SetXY($x_pos,$y_pos);
-		$pdf->Multicell(8,5,utf8_decode($result[$i]['qty']),1,'C',FALSE);
+		$pdf->Multicell(14,5,utf8_decode($result[$i]['qty']),1,'C',FALSE);
 		
-		$pdf->SetXY($x_pos + 8,$y_pos);
+		$pdf->SetXY($x_pos + 14,$y_pos);
 		$pdf->Multicell(30,5,utf8_decode($result[$i]['num_part']),1,'C',FALSE);
 
-                $pdf->SetXY($x_pos + 38,$y_pos);
-		$pdf->Multicell(112,5,utf8_decode($result[$i]['descripcion']),1,'L',FALSE);
+                $pdf->SetXY($x_pos + 44,$y_pos);
+		$pdf->Multicell(106,5,utf8_decode($result[$i]['descripcion']),1,'L',FALSE);
 		
 		$pdf->SetXY($x_pos + 150,$y_pos);		
 		$pdf->Multicell(20,5,utf8_decode('$'.$result[$i]['precio_unit']),1,'R',FALSE);
