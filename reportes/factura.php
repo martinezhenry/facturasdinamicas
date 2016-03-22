@@ -226,7 +226,7 @@
 		$pdf->SetXY(85,40);
 		$pdf->Multicell(30,5,utf8_decode($date),1,'C',FALSE);
 		$pdf->SetXY(115,40);
-		$pdf->Multicell(30,5,utf8_decode('Page '.$pdf->PageNo().''),1,'C',FALSE);
+		$pdf->Multicell(30,5,utf8_decode('Page '.$pdf->PageNo().' to {nb}'),1,'C',FALSE);
 		$pdf->SetXY(145,40);
 		$pdf->Multicell(30,5,utf8_decode($order),1,'C',FALSE);
 		$pdf->SetXY(175,40);
@@ -250,7 +250,7 @@
                 $pdf->SetXY(15, $myY);
 		$pdf->Multicell(63,5,utf8_decode('Ship Port'),1,'C',FALSE);
 		$pdf->SetXY(78,$myY);
-		$pdf->Multicell(63,5,utf8_decode('IncomeTerms'),1,'C',FALSE);
+		$pdf->Multicell(63,5,utf8_decode('Inco Terms'),1,'C',FALSE);
 		$pdf->SetXY(141,$myY);
 		$pdf->Multicell(64,5,utf8_decode('Terms'),1,'C',FALSE);
 
@@ -296,7 +296,8 @@
        // getShip($rifCli);
         // echo $imgType;
         
-	$pdf = new PDF('P','mm','Letter');	
+	$pdf = new PDF('P','mm','Letter');
+    $pdf->AliasNbPages();	
 	$pdf->SetMargins(0,0,0,0);
 	$pdf->SetAutoPageBreak(false, 0.0);
 	$pdf->AddPage();
