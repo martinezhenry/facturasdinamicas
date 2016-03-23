@@ -250,7 +250,7 @@
                 $pdf->SetXY(15, $myY);
 		$pdf->Multicell(63,5,utf8_decode('Ship Port'),1,'C',FALSE);
 		$pdf->SetXY(78,$myY);
-		$pdf->Multicell(63,5,utf8_decode('Inco Terms'),1,'C',FALSE);
+		$pdf->Multicell(63,5,utf8_decode('IncoTerms'),1,'C',FALSE);
 		$pdf->SetXY(141,$myY);
 		$pdf->Multicell(64,5,utf8_decode('Terms'),1,'C',FALSE);
 
