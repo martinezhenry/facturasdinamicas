@@ -17,6 +17,16 @@
         <script src="js/clientes.js"></script>
 
 <?php } ?>
+
+<?php if ( isset($pag) && strcmp($pag,_QUICKBOOKS_) == 0){ ?>
+        <script src="js/main-quickbooks.js"></script>
+
+<?php } ?>
+
+<?php if ( isset($pag) && strcmp($pag,_ACCEPTED_) == 0){ ?>
+        <script src="js/testGetDataQBO.js"></script>
+
+<?php } ?>
     </head>
     <body>
 
@@ -35,7 +45,15 @@
             
             require_once 'views/clientes.html'; 
             
-        } else {
+        } else if (strcmp($pag,_QUICKBOOKS_) == 0){
+            
+            require_once 'views/quickbooks.html'; 
+            
+        } else if (strcmp($pag,_ACCEPTED_) == 0){
+            
+            require_once 'views/testGetDataQBO.html'; 
+            
+        }else {
              require_once 'views/main.html'; 
         }
         

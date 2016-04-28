@@ -9,4 +9,6 @@
 define('_MAIN_', 'main');
 define('_COMPANIES_', 'empresas');
 define('_CUSTOMERS_', 'clientes');
+define('_QUICKBOOKS_', 'qbo');
+define('_ACCEPTED_', 'accepted');
 //define('_MAIN_', 'main');
