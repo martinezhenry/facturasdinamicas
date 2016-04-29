@@ -5,6 +5,24 @@ $(document).ready(function(){
 		getCustomersQBO();
 
 	});
+
+	$('#getEmployees').on('click', function(){
+
+		getEmployeesQBO();
+
+	});
+
+	$('#getAccounts').on('click', function(){
+
+		getAccountsQBO();
+
+	});
+
+	$('#getSales').on('click', function(){
+
+		getSalesReceiptQBO();
+
+	});
 });
 
 
@@ -21,22 +39,30 @@ function getCustomersQBO(){
         console.log(r);
 		 if (r != false){
                 
-                var html = "<table border='1'>";
+                var html = "<table border='1' width='95%' cellpadding='5'>";
+
+                html += "<tr><th>No.</th><th>Name</th><th>FamilyName</th><th>EmailAddr</th><th>Phone</th><th>BillAddr</th></tr>";
                 
                 $.each(r, function( key, value ) {
+
                     html += "<tr id=''>";
                     html += "<td>" + (key+1) + "</td>";
                     html += "<td>" + value.GivenName + "</td>";
                     html += "<td>" + value.FamilyName + "</td>";
-                   
+                    html += (value.PrimaryEmailAddr) ? "<td>" + value.PrimaryEmailAddr.Address + "</td>":"<td></td>";
+
+                    html += (value.PrimaryPhone) ? "<td>" + value.PrimaryPhone.FreeFormNumber + "</td>": "<td></td>"; 
+                    html += ( value.BillAddr ) ? "<td>" + value.BillAddr.City + ', ' + value.BillAddr.Country + ', ' + value.BillAddr.Line1 + ', ' + value.BillAddr.PostalCode + "</td>": "<td></td>";
                     html += "</tr>";
                     
                   });
                 html += "</table>"
               $('.data').html(html);
+            } else {
+            	window.location = '?pag=qbo';
             }
 
-              
+             //	$('.data').html(r); 
             
         }
     }).fail(function(r){
@@ -53,39 +79,50 @@ function getCustomersQBO(){
 
 function getEmployeesQBO(){
 
-	console.log('getEmployeesDBO');
-    $.ajax({
-        url: 'controller/companies.php',
-        data: {'parameters' : {'parameters':id}, 'method': 'getCompanies' },
+	console.log('getEmployeesQBO');
+       $.ajax({
+        url: 'controller/quickbooks.php',
+        data: {'method': 'getEmployeesQBO' },
         method: 'post',
         dataType: 'json',
         success: function(r){
             
-       console.log(r);
-            if (r != false){
+        console.log(r);
+		 if (r != false){
                 
-                var html = "";
+                var html = "<table border='1' width='95%' cellpadding='5'>";
+
+                html += "<tr><th>No.</th><th>Name</th><th>FamilyName</th><th>EmailAddr</th><th>Phone</th><th>BirthDate</th></tr>";
                 
                 $.each(r, function( key, value ) {
-                    html += "<tr id='"+value.id+"'>";
+
+                    html += "<tr id=''>";
                     html += "<td>" + (key+1) + "</td>";
-                    html += "<td>" + value.rif + "</td>";
-                    html += "<td>" + value.razon + "</td>";
-                    html += "<td>" + value.dir + "</td>";
-                    html += "<td>" + value.tlf + "</td>";
-                    html += "<td><a class='edit icon'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a><a class='delete'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></td>";
+                    html += "<td>" + value.GivenName + "</td>";
+                    html += "<td>" + value.FamilyName + "</td>";
+                    html += (value.PrimaryEmailAddr) ? "<td>" + value.PrimaryEmailAddr.Address + "</td>":"<td></td>";
+
+                    html += (value.PrimaryPhone) ? "<td>" + value.PrimaryPhone.FreeFormNumber + "</td>": "<td></td>"; 
+                    html += ( value.BirthDate ) ? "<td>" + value.BirthDate + "</td>": "<td></td>";
                     html += "</tr>";
                     
                   });
-                $('#companies tbody').html(html);
+                html += "</table>"
+              $('.data').html(html);
+            } else {
+            	window.location = '?pag=qbo';
             }
+
+             //	$('.data').html(r); 
+            
         }
     }).fail(function(r){
         console.log(r);
-            $('#msg .modal-body').html('Error consultando la(s) compañia(s)');
+            $('#msg .modal-body').html('Error consultando customer(s) QBO');
             $('#msg').addClass('success');
             $('#msg').modal('toggle');
     });
+
 
 
 }
@@ -94,36 +131,46 @@ function getEmployeesQBO(){
 
 function getAccountsQBO(){
 
-	console.log('getAccountsDBO');
-    $.ajax({
-        url: 'controller/companies.php',
-        data: {'parameters' : {'parameters':id}, 'method': 'getCompanies' },
+	console.log('getAccountsQBO');
+         $.ajax({
+        url: 'controller/quickbooks.php',
+        data: {'method': 'getAccountsQBO' },
         method: 'post',
         dataType: 'json',
         success: function(r){
             
-       console.log(r);
-            if (r != false){
+        console.log(r);
+		 if (r != false){
                 
-                var html = "";
+                var html = "<table border='1' width='95%' cellpadding='5'>";
+
+                html += "<tr><th>No.</th><th>Name</th><th>AccountType</th><th>CurrentBalance</th><th>CurrencyRef</th><th>Active</th></tr>";
                 
                 $.each(r, function( key, value ) {
-                    html += "<tr id='"+value.id+"'>";
+
+                    html += "<tr id=''>";
                     html += "<td>" + (key+1) + "</td>";
-                    html += "<td>" + value.rif + "</td>";
-                    html += "<td>" + value.razon + "</td>";
-                    html += "<td>" + value.dir + "</td>";
-                    html += "<td>" + value.tlf + "</td>";
-                    html += "<td><a class='edit icon'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a><a class='delete'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></td>";
+                    html += "<td>" + value.Name + "</td>";
+                    html += "<td>" + value.AccountType + "</td>";
+                    html += (value.CurrentBalance) ? "<td>" + value.CurrentBalance + "</td>":"<td></td>";
+
+                    html += (value.CurrencyRef) ? "<td>" + value.CurrencyRef + "</td>": "<td></td>"; 
+                    html += ( value.Active ) ? "<td>" + value.Active + "</td>": "<td></td>";
                     html += "</tr>";
                     
                   });
-                $('#companies tbody').html(html);
+                html += "</table>"
+              $('.data').html(html);
+            } else {
+            	window.location = '?pag=qbo';
             }
+
+             //	$('.data').html(r); 
+            
         }
     }).fail(function(r){
         console.log(r);
-            $('#msg .modal-body').html('Error consultando la(s) compañia(s)');
+            $('#msg .modal-body').html('Error consultando customer(s) QBO');
             $('#msg').addClass('success');
             $('#msg').modal('toggle');
     });
@@ -135,39 +182,50 @@ function getAccountsQBO(){
 
 function getSalesReceiptQBO(){
 
-	console.log('getSalesReceiptDBO');
-    $.ajax({
-        url: 'controller/companies.php',
-        data: {'parameters' : {'parameters':id}, 'method': 'getCompanies' },
+	console.log('getSalesReceiptQBO');
+           $.ajax({
+        url: 'controller/quickbooks.php',
+        data: {'method': 'getSalesReceiptQBO' },
         method: 'post',
         dataType: 'json',
         success: function(r){
             
-       console.log(r);
-            if (r != false){
+        console.log(r);
+		 if (r != false){
                 
-                var html = "";
+                var html = "<table border='1' width='95%' cellpadding='5'>";
+
+                html += "<tr><th>No.</th><th>DocNumber</th><th>CustomerMemo</th><th>BillAddr</th><th>TotalAmt</th><th>TxnDate</th></tr>";
                 
                 $.each(r, function( key, value ) {
-                    html += "<tr id='"+value.id+"'>";
+
+                    html += "<tr id=''>";
                     html += "<td>" + (key+1) + "</td>";
-                    html += "<td>" + value.rif + "</td>";
-                    html += "<td>" + value.razon + "</td>";
-                    html += "<td>" + value.dir + "</td>";
-                    html += "<td>" + value.tlf + "</td>";
-                    html += "<td><a class='edit icon'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a><a class='delete'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></td>";
+                    html += "<td>" + value.DocNumber + "</td>";
+                    html += "<td>" + value.CustomerMemo + "</td>";
+                    html += (value.BillAddr) ? "<td>" + value.BillAddr.Line1 + ', ' + value.BillAddr.Line2 + "</td>":"<td></td>";
+
+                    html += (value.TotalAmt) ? "<td>" + value.TotalAmt + "</td>": "<td></td>"; 
+                    html += ( value.TxnDate ) ? "<td>" + value.TxnDate + "</td>": "<td></td>";
                     html += "</tr>";
                     
                   });
-                $('#companies tbody').html(html);
+                html += "</table>"
+              $('.data').html(html);
+            } else {
+            	window.location = '?pag=qbo';
             }
+
+             //	$('.data').html(r); 
+            
         }
     }).fail(function(r){
         console.log(r);
-            $('#msg .modal-body').html('Error consultando la(s) compañia(s)');
+            $('#msg .modal-body').html('Error consultando customer(s) QBO');
             $('#msg').addClass('success');
             $('#msg').modal('toggle');
     });
+
 
 
 }

@@ -30,7 +30,9 @@ try {
 	if ( isset($_GET['oauth_token']) && isset($_GET['oauth_verifier']) ){
 		// step 3: request a access token from Intuit
     $oauth->setToken($_GET['oauth_token'], $_SESSION['secret']);
+    	
 		$access_token = $oauth->getAccessToken( OAUTH_ACCESS_URL );
+
 		
 		$_SESSION['token'] = serialize( $access_token );
     $_SESSION['realmId'] = $_REQUEST['realmId'];  // realmId is legacy for customerId

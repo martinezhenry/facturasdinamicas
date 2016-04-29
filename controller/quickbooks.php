@@ -31,6 +31,9 @@ function getCustomersQBO($id=NULL){
     
     }
 
+
+    if (isset($_SESSION['token'])){
+
   //Specify QBO or QBD
 $serviceType = IntuitServicesType::QBO;
 
@@ -40,7 +43,7 @@ if (!$realmId)
   exit("Please add realm to App.Config before running this sample.\n");
 
 $token = unserialize($_SESSION['token']);
-
+//echo $token['oauth_token'];
 // Prep Service Context
 $requestValidator = new OAuthRequestValidator($token['oauth_token'],
                                               $token['oauth_token_secret'],
@@ -62,120 +65,199 @@ if (!$dataService)
 $entities = $dataService->Query($sql);
 
 // Echo some formatted output
-$i = 0;
+if (is_null($entities)){
+  unset($_SESSION['token']);
+  //header('location: ?pag=qbo');
+}
 
 return json_encode($entities);
 
+} else{
+    //header('location: ?pag=qbo');
+}
+return json_encode(false);
   
 }
 
-function makeLogo($extension) {
-    
-    return file_get_contents("../files/logo.".$extension);
-    
-}
-
-
-function putCompany($company){
-    
-    
-    $sql = "select count(rif) as r from empresa where rif='".$company['rif']."'";
-    DBManagement::getInstance()->consultar($sql);
-    $r = DBManagement::getInstance()->getResultSet();
-
-    if ($r[0]['r'] == 0){
-    
-   $sql = "insert into empresa (rif, razon_social, direccion, logo, type_logo) values ('".$company['rif']."','".$company['razon']."','".$company['dir']."', ?, '".$company['logoType']."')";
-   
-   $var[] = makeLogo(explode('.', $company['logoExt'])[1]);
-
-
-   DBManagement::getInstance()->insertar($sql, $var);
-   DBManagement::getInstance()->getResultSet();
-   
-   if(DBManagement::getInstance()->getCountRows() == 1){
-       
-       $sql = "insert into empresa_telefono (rif, telefono) values ('".$company['rif']."', '".$company['tlf']."')";
-        
-       DBManagement::getInstance()->insertar($sql);
-       DBManagement::getInstance()->getResultSet();
-       if(DBManagement::getInstance()->getCountRows() == 1){
-           $result['result'] = "EMPRESA CREADA";
-       } else {
-           
-          $result['result'] = "EMPRESA CREADA. PERO NO SE PUDO REGISTRAR EL TELEFONO.";
-
-       }
-       
-   } else{
-       $result['error'] = "NO SE PUDO REGISTRAR LA EMPRESA.";
-   }
-       
-    
-    
-    } else {
-        $result['error'] = "LA EMPRESA YA SE ENCUENTRA REGISTRADA.";
-        
-    }
-    
-    return json_encode($result);
-}
-
-
-function editCompany($company){
-    
-    
-    $valores = "razon_social = '".$company['razon']."', direccion='".$company['dir']."', logo= ?, type_logo='".$company['logoType']."'";
-    $rif = $company['rif'];
-    $sql = "update empresa set $valores where rif = '".$rif."'";
-    
-   //$sql = "insert into empresa (rif, razon_social, direccion, logo, type_logo) values ('".$company['rif']."','".$company['razon']."','".$company['dir']."', ?, '".$company['logoType']."')";
-
-   $var[] = makeLogo(explode('.', $company['logoExt'])[1]);
-
-
-   DBManagement::getInstance()->insertar($sql, $var);
-   //var_dump(DBManagement::getInstance()->getUltError());
-   
-   
-   if(DBManagement::getInstance()->getCountRows() == 1){
-       
+function getEmployeesQBO($id=NULL){
+    if (isset($id) && $id != ""){
       
-           $result['result'] = "EMPRESA ACTUALIZADA";
-     
-       
-   } else{
-       $result['error'] = "NO SE PUDO ACTUALIZAR LA EMPRESA.";
-   }
-       
+        $sql = "SELECT * FROM Employee";
+
+    } else {
+
+        $sql = "SELECT * FROM Employee";
     
+    }
+
+
+    if (isset($_SESSION['token'])){
+
+  //Specify QBO or QBD
+$serviceType = IntuitServicesType::QBO;
+
+// Get App Config
+$realmId = ConfigurationManager::AppSettings('RealmID');
+if (!$realmId)
+  exit("Please add realm to App.Config before running this sample.\n");
+
+$token = unserialize($_SESSION['token']);
+//echo $token['oauth_token'];
+// Prep Service Context
+$requestValidator = new OAuthRequestValidator($token['oauth_token'],
+                                              $token['oauth_token_secret'],
+                                              ConfigurationManager::AppSettings('ConsumerKey'),
+                                              ConfigurationManager::AppSettings('ConsumerSecret'));
+$serviceContext = new ServiceContext($realmId, $serviceType, $requestValidator);
+if (!$serviceContext)
+  exit("Problem while initializing ServiceContext.\n");
+
+//var_dump ($serviceContext);
+
+// Prep Data Services
+$dataService = new DataService($serviceContext);
+if (!$dataService)
+  exit("Problem while initializing DataService.\n");
+
+//var_dump ($dataService);
+// Run a query
+$entities = $dataService->Query($sql);
+
+// Echo some formatted output
+if (is_null($entities)){
+  unset($_SESSION['token']);
+  //header('location: ?pag=qbo');
+}
+
+return json_encode($entities);
+
+} else{
+    //header('location: ?pag=qbo');
+}
+return json_encode(false);
   
-    
-    return json_encode($result);
-    
 }
 
 
-function deleteCompany($id=NULL){
-    
-    $sql = "delete from empresa where rif='".$id."'";
-  
+function getAccountsQBO($id=NULL){
+    if (isset($id) && $id != ""){
+      
+        $sql = "SELECT * FROM Account";
 
-   DBManagement::getInstance()->insertar($sql);
-   DBManagement::getInstance()->getResultSet();
-   
-   if(DBManagement::getInstance()->getCountRows() == 1){
-           $sql = "delete from empresa_telefono where rif='".$id."'";
-            DBManagement::getInstance()->insertar($sql);
-   
-       $result['result'] = 'EMPRESA ELIMINADA.';
-   } else{
-       $result['error'] = "NO SE PUDO ELIMINAR LA EMPRESA.";
-   }
-       
-    return json_encode($result);
+    } else {
+
+        $sql = "SELECT * FROM Account";
     
+    }
+
+
+    if (isset($_SESSION['token'])){
+
+  //Specify QBO or QBD
+$serviceType = IntuitServicesType::QBO;
+
+// Get App Config
+$realmId = ConfigurationManager::AppSettings('RealmID');
+if (!$realmId)
+  exit("Please add realm to App.Config before running this sample.\n");
+
+$token = unserialize($_SESSION['token']);
+//echo $token['oauth_token'];
+// Prep Service Context
+$requestValidator = new OAuthRequestValidator($token['oauth_token'],
+                                              $token['oauth_token_secret'],
+                                              ConfigurationManager::AppSettings('ConsumerKey'),
+                                              ConfigurationManager::AppSettings('ConsumerSecret'));
+$serviceContext = new ServiceContext($realmId, $serviceType, $requestValidator);
+if (!$serviceContext)
+  exit("Problem while initializing ServiceContext.\n");
+
+//var_dump ($serviceContext);
+
+// Prep Data Services
+$dataService = new DataService($serviceContext);
+if (!$dataService)
+  exit("Problem while initializing DataService.\n");
+
+//var_dump ($dataService);
+// Run a query
+$entities = $dataService->Query($sql);
+
+// Echo some formatted output
+if (is_null($entities)){
+  unset($_SESSION['token']);
+  //header('location: ?pag=qbo');
 }
+
+return json_encode($entities);
+
+} else{
+    //header('location: ?pag=qbo');
+}
+return json_encode(false);
+  
+}
+
+
+function getSalesReceiptQBO($id=NULL){
+    if (isset($id) && $id != ""){
+      
+        $sql = "SELECT * FROM SalesReceipt";
+
+    } else {
+
+        $sql = "SELECT * FROM SalesReceipt";
+    
+    }
+
+
+    if (isset($_SESSION['token'])){
+
+  //Specify QBO or QBD
+$serviceType = IntuitServicesType::QBO;
+
+// Get App Config
+$realmId = ConfigurationManager::AppSettings('RealmID');
+if (!$realmId)
+  exit("Please add realm to App.Config before running this sample.\n");
+
+$token = unserialize($_SESSION['token']);
+//echo $token['oauth_token'];
+// Prep Service Context
+$requestValidator = new OAuthRequestValidator($token['oauth_token'],
+                                              $token['oauth_token_secret'],
+                                              ConfigurationManager::AppSettings('ConsumerKey'),
+                                              ConfigurationManager::AppSettings('ConsumerSecret'));
+$serviceContext = new ServiceContext($realmId, $serviceType, $requestValidator);
+if (!$serviceContext)
+  exit("Problem while initializing ServiceContext.\n");
+
+//var_dump ($serviceContext);
+
+// Prep Data Services
+$dataService = new DataService($serviceContext);
+if (!$dataService)
+  exit("Problem while initializing DataService.\n");
+
+//var_dump ($dataService);
+// Run a query
+$entities = $dataService->Query($sql);
+
+// Echo some formatted output
+if (is_null($entities)){
+  unset($_SESSION['token']);
+  //header('location: ?pag=qbo');
+}
+
+return json_encode($entities);
+
+} else{
+    //header('location: ?pag=qbo');
+}
+return json_encode(false);
+  
+}
+
 
 
 
