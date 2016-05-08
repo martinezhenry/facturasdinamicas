@@ -23,6 +23,37 @@ $(document).ready(function(){
 		getSalesReceiptQBO();
 
 	});
+
+
+        $('#fecha-from').datepicker({dateFormat: 'yy-mm-dd',
+        beforeShow:function(input) {
+            $('#fecha-from').css({
+                "position": "relative",
+                "z-index": 999999
+            });
+        }, 
+        onClose: function (selectedDate) {
+            $("#fecha-to").datepicker("option", "minDate", selectedDate);
+        }
+
+    });
+
+
+    $('#fecha-to').datepicker({dateFormat: 'yy-mm-dd',
+        beforeShow:function(input) {
+            $('#fecha-to').css({
+                "position": "relative",
+                "z-index": 999999
+            });
+        },
+        onClose: function (selectedDate) {
+            $("#fecha-from").datepicker("option", "maxDate", selectedDate);
+        }
+
+    });
+
+
+
 });
 
 
@@ -183,14 +214,16 @@ function getAccountsQBO(){
 function getSalesReceiptQBO(){
 
 	console.log('getSalesReceiptQBO');
+    var from = $('#fecha-from').val();
+    var to = $('#fecha-to').val();
            $.ajax({
         url: 'controller/quickbooks.php',
-        data: {'method': 'getSalesReceiptQBO' },
+        data: {'method': 'getSalesReceiptQBO', 'parameters': {'id':'', 'from': from, 'to' : to} },
         method: 'post',
         dataType: 'json',
         success: function(r){
             
-        console.log(r);
+        console.error(r);
 		 if (r != false){
                 
                 var html = "<table border='1' width='95%' cellpadding='5'>";
@@ -206,21 +239,25 @@ function getSalesReceiptQBO(){
                     html += (value.BillAddr) ? "<td>" + value.BillAddr.Line1 + ', ' + value.BillAddr.Line2 + "</td>":"<td></td>";
 
                     html += (value.TotalAmt) ? "<td>" + value.TotalAmt + "</td>": "<td></td>"; 
-                    html += ( value.TxnDate ) ? "<td>" + value.TxnDate + "</td>": "<td></td>";
+                    html += ( value.TxnDate ) ? "<td>" + value.MetaData.CreateTime + "</td>": "<td></td>";
                     html += "</tr>";
                     
                   });
                 html += "</table>"
               $('.data').html(html);
             } else {
-            	window.location = '?pag=qbo';
+            	//window.location = '?pag=main';
+                $('#msg .modal-body').html('No se obtuvieron resultados para el rango indicado.');
+                $('#msg').addClass('success');
+                $('#msg').modal('toggle');
+
             }
 
              //	$('.data').html(r); 
             
         }
     }).fail(function(r){
-        console.log(r);
+        console.error(r);
             $('#msg .modal-body').html('Error consultando customer(s) QBO');
             $('#msg').addClass('success');
             $('#msg').modal('toggle');

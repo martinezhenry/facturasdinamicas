@@ -199,7 +199,7 @@ return json_encode(false);
 }
 
 
-function getSalesReceiptQBO($id=NULL){
+function getSalesReceiptQBO($id=NULL, $from = NULL, $to = NULL){
     if (isset($id) && $id != ""){
       
         $sql = "SELECT * FROM SalesReceipt";
@@ -209,6 +209,15 @@ function getSalesReceiptQBO($id=NULL){
         $sql = "SELECT * FROM SalesReceipt";
     
     }
+
+    if (isset($from) && trim($from) != "" && isset($to) && trim($to) != ""){
+
+      $where = " WHERE MetaData.CreateTime >= '".$from."T00:00:00' and MetaData.CreateTime <= '".$to."T23:59:59'";
+    } else $where = '';
+
+    $sql = $sql . $where;
+
+    //echo $sql;
 
 
     if (isset($_SESSION['token'])){
@@ -258,7 +267,7 @@ return json_encode(false);
   
 }
 
-
+//var_dump($_POST);
 
 
 if (isset($_POST)){

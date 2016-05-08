@@ -75,5 +75,6 @@ hr {
     position: absolute;
     top: 5px;
     left: 2px;
+    z-index: 999999;
     
 }

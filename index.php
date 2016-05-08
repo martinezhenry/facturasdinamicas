@@ -7,6 +7,7 @@
         
         <?php if (!isset($pag) || strcmp($pag,_MAIN_) == 0){ ?>
         <script src="js/main.js"></script>
+        <script src="js/main-quickbooks.js"></script>
 
 <?php } ?>
 <?php if ( isset($pag) && strcmp($pag,_COMPANIES_) == 0){ ?>
