@@ -504,7 +504,7 @@ $(document).ready(function () {
         });
     }
 
-});
+    });
 
     $('#generar-pedido').on('click', function () {
         putPedido();
