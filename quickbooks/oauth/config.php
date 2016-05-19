@@ -6,8 +6,8 @@
  // session_save_path('/tmp');
   session_start();
 
-  define('OAUTH_CONSUMER_KEY', 'qyprdPDVJg0VBRwe6Rk2pEEvLixAH7');
-  define('OAUTH_CONSUMER_SECRET', 'UzGvy7Cgm6ylA2F0vUzpZUHoF3YI70gX7U8ueUsD');
+  define('OAUTH_CONSUMER_KEY', 'qyprdnozTx9WhSwTVq1FQ5DDIdbCbk');
+  define('OAUTH_CONSUMER_SECRET', 'cayXQhUWJjcmEt3ak9EYdS7JS8QkhoKmTaTG9UCm');
   
   
   if(strlen(OAUTH_CONSUMER_KEY) < 5 OR strlen(OAUTH_CONSUMER_SECRET) < 5 ){

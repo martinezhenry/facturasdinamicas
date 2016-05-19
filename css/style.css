@@ -78,3 +78,12 @@ hr {
     z-index: 999999;
     
 }
+
+
+.data {
+
+  min-height: 150px;
+  max-height: 500px;
+  overflow: auto;
+
+}
