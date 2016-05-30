@@ -271,6 +271,11 @@ return json_encode(false);
   
 }
 
+
+function putSalesInFile(){
+    
+}
+
 //var_dump($_POST);
 
 
