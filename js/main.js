@@ -377,7 +377,7 @@ function aplicateDiscount(){
          
                    // $('#products tbody').html(html);
                   //  $('#details-products').val(count);
-<<<<<<< HEAD
+
                    $(this).children('td').eq(4).find('input').val('$'+parseFloat(producto).formatMoney(2, '.', ','));
                    $(this).children('td').eq(5).text('$'+valorFinal.formatMoney(2, '.', ','));
 
