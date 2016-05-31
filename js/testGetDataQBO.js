@@ -235,6 +235,8 @@ function getSalesReceiptQBO(){
         success: function(r){
             
         console.error(r);
+        $('#test').html(r);
+
 		 if (r != false){
                 
                 var html = "<table border='1' width='100%' cellpadding='5'>";

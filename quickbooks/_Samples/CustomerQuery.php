@@ -10,20 +10,26 @@ require_once(PATH_SDK_ROOT . 'Utility/Configuration/ConfigurationManager.php');
 //Specify QBO or QBD
 $serviceType = IntuitServicesType::QBO;
 
+
 // Get App Config
 $realmId = ConfigurationManager::AppSettings('RealmID');
 if (!$realmId)
 	exit("Please add realm to App.Config before running this sample.\n");
+
+echo ConfigurationManager::AppSettings('AccessToken');
 
 // Prep Service Context
 $requestValidator = new OAuthRequestValidator(ConfigurationManager::AppSettings('AccessToken'),
                                               ConfigurationManager::AppSettings('AccessTokenSecret'),
                                               ConfigurationManager::AppSettings('ConsumerKey'),
                                               ConfigurationManager::AppSettings('ConsumerSecret'));
+
+var_dump($requestValidator);
 $serviceContext = new ServiceContext($realmId, $serviceType, $requestValidator);
 if (!$serviceContext)
 	exit("Problem while initializing ServiceContext.\n");
 
+var_dump($serviceContext);
 // Prep Data Services
 $dataService = new DataService($serviceContext);
 if (!$dataService)

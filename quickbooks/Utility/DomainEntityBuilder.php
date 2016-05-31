@@ -197,9 +197,9 @@ class DomainEntityBuilder {
      */
     public static function create($type,$values)
     {
-        $i = new static($type);
-        $i->usePropertyValues($values);
-        return $i->createInstance();
+       $i = new static($type);
+       $i->usePropertyValues($values);
+       return $i->createInstance();
     }
     
     /**

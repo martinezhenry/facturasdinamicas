@@ -109,14 +109,6 @@
 								<xsl:apply-templates
 									select="*[local-name()='annotation' and
 					namespace-uri()='http://www.w3.org/2001/XMLSchema']" />
-
-                <xsl:for-each
-					select="*[local-name()='restriction' and
-					namespace-uri()='http://www.w3.org/2001/XMLSchema']">
-                  <xsl:apply-templates
-                 select="*[local-name()='enumeration' and namespace-uri()='http://www.w3.org/2001/XMLSchema']" />
-                </xsl:for-each>
-               
 							</class>
 						</xsl:otherwise>
 					</xsl:choose>
@@ -234,13 +226,8 @@
 		<xsl:apply-templates />
 	</xsl:template>
 
-	<!-- enumeration -->
-	<xsl:template match="//*[local-name()='enumeration' and namespace-uri()='http://www.w3.org/2001/XMLSchema']">
-                         <const value ="{@value}" />
-                         <xsl:apply-templates />
-        </xsl:template>
-        
-        <!-- Simplecontent -->
+	<!-- Simplecontent -->
+
 	<xsl:template
 		match="*[local-name()='simpleContent' and namespace-uri()='http://www.w3.org/2001/XMLSchema']">
 		<xsl:apply-templates />

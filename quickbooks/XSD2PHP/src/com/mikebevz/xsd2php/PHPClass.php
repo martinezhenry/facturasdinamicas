@@ -89,9 +89,6 @@ class PHPClass extends Common {
      * @var boolean
      */
     public $debug = false;
-    
-    
-    public $constants;
 
     /**
      * __construct
@@ -177,11 +174,6 @@ class PHPClass extends Common {
             $code .= $this->getClassProperties($this->classProperties);
         }
         
-        if (!empty($this->constants)) {
-            $code .= $this->getClassConstants($this->constants);
-        }
-        
-        
         $code .= ''."\n";
         $code .= ''."\n";
         $code .= '} // end class '.$this->name."\n";
@@ -206,21 +198,6 @@ class PHPClass extends Common {
             $code .= $indent.'public $'.$prop['name'].";\n";
         }
         return $code;
-    }
-    
-    
-    public function getClassConstants($const, $indent = "\t") {
-        $code = array();
-        
-        foreach ($const as $value) {
-            $code[] = $indent.'const ' . $this->constNameFromValue($value) . " = \"$value\";"  ;
-        }
-        return implode("\n", $code);   
-    }
-    
-    public function constNameFromValue($value)
-    {
-        return strtoupper(str_ireplace(array(" ","-"), "_", $value));
     }
     
     /**

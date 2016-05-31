@@ -165,7 +165,7 @@ class CoreConstants
 	 * The Request source header value.
 	 * @var string REQUESTSOURCEHEADER
 	 */
-	const USERAGENT = "V3PHPSDK2.3.0";
+	const USERAGENT = "V3PHPSDK2.2.0";
         
         public static function getType($string, $return=1)
         {
