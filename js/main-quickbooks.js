@@ -5,7 +5,7 @@ $(document).ready(function() {
     intuit.ipp.anywhere.setup({
         menuProxy: '',
         //grantUrl: 'http://'+parser.hostname+':8080/PHPOAuthSample/oauth.php?start=t' 
-        grantUrl: 'http://'+parser.hostname+':8080/facturas/quickbooks/oauth/oauth.php?start=t' 
+        grantUrl: 'http://'+parser.hostname+'/facturas/quickbooks/oauth/oauth.php?start=t' 
         // outside runnable you can point directly to the oauth.php page
     });
 
