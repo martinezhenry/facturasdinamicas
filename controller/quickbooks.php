@@ -255,7 +255,7 @@ if (!$dataService)
 //var_dump ($dataService);
 // Run a query
 $entities = $dataService->Query($sql);
-
+//return (var_dump($sql));
 // Echo some formatted output
 if (is_null($entities)){
   unset($_SESSION['token']);
