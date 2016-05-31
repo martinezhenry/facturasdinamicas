@@ -359,3 +359,1830 @@ GetSerializer
 GetSerializer(Request): Xml
 GetSerializer
 GetSerializer(Response): XML
+<<<<<<< HEAD
+=======
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called GetBaseURL method.
+GetSerializer
+GetSerializer(Response): XML
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called Method Query.
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+Called PrepareRequest method
+GetSerializer
+GetSerializer(Request): Xml
+GetSerializer
+GetSerializer(Response): XML
+>>>>>>> d086285be54066f806e1606f348ef0b640e0d572

@@ -19,15 +19,17 @@ require_once dirname(__FILE__) . '/model/Producto.php';
 
 $XLFileType = PHPExcel_IOFactory::identify('files/products.xlsx');  
 $objReader = PHPExcel_IOFactory::createReader($XLFileType);  
-$objReader->setLoadSheetsOnly('Sheet1');  
+//$objReader->setLoadSheetsOnly('Sheet1');  
 $objPHPExcel = $objReader->load('files/products.xlsx');  
 
 //Aqui viene lo que te interesa 
 
-$objWorksheet = $objPHPExcel->setActiveSheetIndexByName('Sheet1');  
+$objWorksheet = $objPHPExcel->setActiveSheetIndex(0);  
+//$objWorksheet = $objPHPExcel->setActiveSheetIndexByName('Hoja1');
 
 
 for ($i=1; $i < $objPHPExcel->getActiveSheet()->getHighestRow(); $i++) {
+//var_dump($objPHPExcel->getActiveSheet()->getCell('A'.($i+1))->getFormattedValue());
    $producto = new Producto();
    $producto->setCantidad($objPHPExcel->getActiveSheet()->getCell('A'.($i+1))->getFormattedValue());
    $producto->setNumPart($objPHPExcel->getActiveSheet()->getCell('B'.($i+1))->getFormattedValue());
@@ -39,8 +41,10 @@ for ($i=1; $i < $objPHPExcel->getActiveSheet()->getHighestRow(); $i++) {
    
 }
 
-
-echo json_encode($productos);
+if (isset($productos))
+	echo json_encode($productos);
+else
+	echo json_encode(FALSE);
 
 
 
