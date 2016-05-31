@@ -73,6 +73,7 @@ function refreshProducts() {
                     html += "<td>" + value.cant + "</td>";
                     html += "<td>" + value.numPart + "</td>";
                     html += "<td>" + value.desc + "</td>";
+
                     html += "<td class='"+value.prec+"'> <input class='form-control edit-edit-price' type='text' value='$"+ (value.prec).replace(new RegExp(/[^0-9.]/,'g'),'') +"'</td>";
                     html += "<td>$" + value.total + "</td>";
                     // html += "<td><a class='edit icon'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a><a class='delete'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></td>";
@@ -82,6 +83,7 @@ function refreshProducts() {
                 $('#products tbody').html(html);
                 $('#details-products').val(count);
                 $('#sub-total-txt').val('$'+subTotal.formatMoney(2, '.', ','));
+
                 calculateTotal();
             }
         }
@@ -292,11 +294,13 @@ function findCustomer() {
 function calculateTotal(){
     
     
+
     //var impuesto = parseInt($('#impuesto-txt').val());
     //var descuento = parseFloat($('#descuento-txt').val().replace(',',''));
     //var carga = parseFloat($('#carga-txt').val().replace(',',''));
     var entrega = (($('#entrega-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
     var insurance = (($('#repo-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
+
     
     console.log(entrega);
     console.log(insurance);
@@ -321,6 +325,7 @@ function calculateTotal(){
     montoDescuento = parseFloat(subTotal - descuento);
     final = montoDescuento + carga + entrega + insurance
     $('#total-txt').val('$'+(final + parseFloat((final * impuesto) / 100)).formatMoney(2, '.', ','));
+
 }
 
 
@@ -372,6 +377,7 @@ function aplicateDiscount(){
          
                    // $('#products tbody').html(html);
                   //  $('#details-products').val(count);
+<<<<<<< HEAD
                    $(this).children('td').eq(4).find('input').val('$'+parseFloat(producto).formatMoney(2, '.', ','));
                    $(this).children('td').eq(5).text('$'+valorFinal.formatMoney(2, '.', ','));
 
@@ -480,8 +486,6 @@ $(document).ready(function () {
     //  editActivated = false;
 
      });
-
-
 
     $('#infile').change(loadFile);
 
