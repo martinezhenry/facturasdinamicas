@@ -43,16 +43,27 @@ $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
 // Add some data
 //echo date('H:i:s') , " Add some data" , EOL;
 $i = 1;
+
+$objPHPExcel->setActiveSheetIndex(0)
+	            ->setCellValue('A'.$i, 'Qty')
+	            ->setCellValue('B'.$i, 'nroPart')
+	            ->setCellValue('C'.$i, 'Description')
+	            ->setCellValue('D'.$i, 'Price');
+
 foreach ($lines as $key => $value) {
 	# code...
 
 $i++;
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A'.$i, $value['qty'])
-            ->setCellValue('B'.$i, $value['nroPart'])
-            ->setCellValue('C'.$i, $value['desc'])
-            ->setCellValue('D'.$i, $value['price']);
-
+//var_dump(count($lines));
+	if (strcmp($value['DetailType'], "SalesItemLineDetail") == 0){
+		//var_dump($value['SalesItemLineDetail']);
+		$objPHPExcel->setActiveSheetIndex(0)
+	            ->setCellValue('A'.$i, $value['SalesItemLineDetail']['Qty'])
+	           // ->setCellValue('B'.$i, $value['nroPart'])
+	             ->setCellValue('B'.$i, '')
+	            ->setCellValue('C'.$i, $value['Description'])
+	            ->setCellValue('D'.$i, $value['SalesItemLineDetail']['UnitPrice']);
+	}
 }
 /*
 // Miscellaneous glyphs, UTF-8
@@ -83,7 +94,7 @@ $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $objWriter->save('files/productsQBO.xlsx');
 $callEndTime = microtime(true);
 $callTime = $callEndTime - $callStartTime;
-
+echo json_encode(TRUE);
 //echo date('H:i:s') , " File written to " , str_replace('.php', '.xlsx', pathinfo(__FILE__, PATHINFO_BASENAME)) , EOL;
 //echo 'Call time to write Workbook was ' , sprintf('%.4f',$callTime) , " seconds" , EOL;
 // Echo memory usage

@@ -302,14 +302,19 @@ function getData(id){
 
                 $.each(r, function( key, value ) {
 
+                   // alert(value.Line);
+                    console.error(value.Line);
                     $.ajax({
                         
                         url : 'createExcel.php',
                         method: 'post',
-                        data: { 'lines' : value.lines },
+                        data: { 'lines' : value.Line },
                         success: function(resp){
                             
-                            alert("finally");
+                            console.error(resp);
+                            if (resp = true){
+                                document.location = '?pag=main&pqbo';
+                            }
                         }
                         
                     });
