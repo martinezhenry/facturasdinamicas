@@ -487,6 +487,7 @@ $(document).ready(function () {
        // alert('entra');
        // $('#infile').attr('disabled');
         refreshProducts('pqbo');
+        $('#exportar-file').css("display", "block");
     }
 
 
