@@ -479,11 +479,12 @@ $(document).ready(function () {
 
 //var editActivated = false;
 
-    var dat = _GET('pqbo');    
+    var dat = 0;
+    dat = _GET('pqbo');    
     //console.error(dat);
    // alert(dat);
 
-    if (dat = 1){
+    if (dat == 1){
        // alert('entra');
        // $('#infile').attr('disabled');
         refreshProducts('pqbo');
