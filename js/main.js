@@ -43,14 +43,14 @@ function getListCompanies(id) {
 
 function refreshProducts(dat) {
     
-    //alert(dat);
+    alert(dat);
     $.ajax({
         url: 'readExcel.php',
         type: 'POST',
         data: {'dat' : dat},
         dataType: 'json',
         success: function (r) {
-       //     console.error(r);
+            console.error(r);
             if (r != false) {
 
                 var html = "";
@@ -482,8 +482,7 @@ $(document).ready(function () {
     var dat = 0;
     dat = _GET('pqbo');    
     //console.error(dat);
-   // alert(dat);
-
+    
     if (dat == 1){
        // alert('entra');
        // $('#infile').attr('disabled');
