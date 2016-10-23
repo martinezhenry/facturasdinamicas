@@ -44,6 +44,7 @@ if (!$realmId)
 
 $token = unserialize($_SESSION['token']);
 //echo $token['oauth_token'];
+//exit;
 // Prep Service Context
 $requestValidator = new OAuthRequestValidator($token['oauth_token'],
                                               $token['oauth_token_secret'],
@@ -255,7 +256,7 @@ if (!$dataService)
 //var_dump ($dataService);
 // Run a query
 $entities = $dataService->Query($sql);
-
+//return var_dump($serviceContext);
 // Echo some formatted output
 if (is_null($entities)){
   unset($_SESSION['token']);
@@ -269,6 +270,11 @@ return json_encode($entities);
 }
 return json_encode(false);
   
+}
+
+
+function putSalesInFile(){
+    
 }
 
 //var_dump($_POST);

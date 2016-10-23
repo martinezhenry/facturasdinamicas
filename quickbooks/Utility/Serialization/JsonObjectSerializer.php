@@ -19,7 +19,7 @@ class JsonObjectSerializer extends IEntitySerializer {
     
         private $lastError = null;
         /**
-         * Contains name of class which will be serialized or deserialized
+         * Contains name of class which will be serialized or deserialized 
          * @var string
          */
         private $entityName = null;
@@ -37,10 +37,10 @@ class JsonObjectSerializer extends IEntitySerializer {
 	public function __construct($idsLogger=NULL) {
 		if ($idsLogger)
 			$this->IDSLogger = $idsLogger;
-		else
+		else		
 			$this->IDSLogger = new TraceLogger();
 	}
-
+        
         /**
          * Handle possible errors and react
          * @param mixed $result
@@ -52,10 +52,10 @@ class JsonObjectSerializer extends IEntitySerializer {
             if(JSON_ERROR_NONE !== $this->lastError) {
                 IdsExceptionManager::HandleException($this->getMessageFromErrorCode($this->lastError));
             }
-            //TODO add logger here
+            //TODO add logger here  
             return $result;
         }
-
+        
         /**
          * Support json_last_error_msg in PHP 5.2
          * @param type $error
@@ -74,9 +74,9 @@ class JsonObjectSerializer extends IEntitySerializer {
                JSON_ERROR_SYNTAX           => 'Syntax error, malformed JSON',
                JSON_ERROR_UTF8             => 'Malformed UTF-8 characters, possibly incorrectly encoded'
            );
-           return array_key_exists($error, $errors) ? $errors[$error] : "Unknown error ({$error})";
+           return array_key_exists($error, $errors) ? $errors[$error] : "Unknown error ({$error})";           
         }
-
+        
         /**
          * Sets entity name
          * @param string $name
@@ -85,7 +85,7 @@ class JsonObjectSerializer extends IEntitySerializer {
         {
             $this->entityName = $name;
         }
-
+        
         /**
          * Retrivies resoure URL (part of URL path) which extracted from domain model entity name
          * @param string $entity
@@ -94,9 +94,9 @@ class JsonObjectSerializer extends IEntitySerializer {
         {
             $this->setEntityName(strtolower(self::cleanPhpClassNameToIntuitEntityName(get_class($entity))));
         }
-
+        
         /**
-         * Creates domain model-like name. In other words it follows naming convetion for SDK
+         * Creates domain model-like name. In other words it follows naming convetion for SDK 
          * TODO make generic and remove duplicates
          * @param type $intuitEntityName
          * @return type
@@ -104,12 +104,12 @@ class JsonObjectSerializer extends IEntitySerializer {
  	private static function decorateIntuitEntityToPhpClassName($intuitEntityName)
 	{
 		return PHP_CLASS_PREFIX . $intuitEntityName;
-	}
-
+	}       
+        
         /**
          * Converts stdClass objects into object with specified type
-         * It tries to learn type from JSON responce
-         *
+         * It tries to learn type from JSON responce 
+         * 
          * @param stdClass $object
          * @param boolean $limitToOne
          * @return mixed (stdClass or domain model entity)
@@ -124,7 +124,7 @@ class JsonObjectSerializer extends IEntitySerializer {
                     $className = self::decorateIntuitEntityToPhpClassName($key);
                     if(!class_exists($className)) { continue; }
                     $entity = DomainEntityBuilder::create($className, $value);
-
+                     
                     if($limitToOne) { return $entity; }
                     $result[] = $entity;
                 }
@@ -134,12 +134,12 @@ class JsonObjectSerializer extends IEntitySerializer {
                 } else {
                     return $result;
                 }
-
+                
             }
-
+            
             return $object;
         }
-
+        
         /**
          * Returns path of URL which represent requested resource
          * @override

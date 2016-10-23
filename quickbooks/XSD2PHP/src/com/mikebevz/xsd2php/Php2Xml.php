@@ -291,7 +291,7 @@ class Php2Xml extends Common {
                         if (is_array($value)) {
                         
                         	// Strip the class prefix, if one exists
-							if ($this->classPrefix && (0===strpos($propDocs['xmlName'], $this->classPrefix)))
+							if ($this->classPrefix && (0==strpos($propDocs['xmlName'], $this->classPrefix)))
 								$propDocs['xmlName'] = substr($propDocs['xmlName'], strlen($this->classPrefix));
 
                             $this->logger->debug("Creating element:".$code.":".$propDocs['xmlName']);

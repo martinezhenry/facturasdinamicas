@@ -1,5 +1,9 @@
 <?php
 
+require_once(POPO_CLASS_PATH . 'IntuitRestServiceDef/IPPBatchItemRequest.php');
+require_once(POPO_CLASS_PATH . 'IntuitRestServiceDef/IPPBatchItemResponse.php');
+require_once(POPO_CLASS_PATH . 'IntuitRestServiceDef/IPPIntuitBatchRequest.php');
+require_once(POPO_CLASS_PATH . 'IntuitRestServiceDef/IPPQueryResponse.php');
 require_once(PATH_SDK_ROOT . 'DataService/IntuitBatchResponse.php');
 require_once(PATH_SDK_ROOT . 'DataService/IntuitResponseStatus.php');
 require_once(PATH_SDK_ROOT . 'Utility/Serialization/XmlObjectSerializer.php');

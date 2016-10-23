@@ -476,9 +476,9 @@ class Xsd2Php extends Common
         if ($phpfile == '' && $this->getXmlSource() == '') {
             throw new \RuntimeException('There is no XML generated');
         }
-        
+
         $dom = new \DOMDocument();
-       // print_r($this->getXmlSource());
+        //print_r($this->getXmlSource());
         if ($this->getXmlSource() != '') {
             $dom->loadXML($this->getXmlSource(), LIBXML_DTDLOAD | LIBXML_DTDATTR |
             LIBXML_NOENT | LIBXML_XINCLUDE);
@@ -497,7 +497,7 @@ class Xsd2Php extends Common
             $phpClass = new PHPClass($this->classPrefix);
             $phpClass->overrideAsSingleNamespace = $this->overrideAsSingleNamespace;
             $phpClass->name = $this->classPrefix.$class->getAttribute('name');
-            
+
             if ($class->getAttribute('type') != '') {
                 $phpClass->type = $class->getAttribute('type');
             }
@@ -507,13 +507,6 @@ class Xsd2Php extends Common
             }
             if ($class->getAttribute('namespace') != '') {
                 $phpClass->namespace = $class->getAttribute('namespace');
-            }
-            if ($class->getElementsByTagName('const')->length > 0) {
-                $array =  array();
-                foreach ($class->getElementsByTagName('const') as $item) {
-                    $array[] = (string)$item->getAttribute('value');
-                }
-                $phpClass->constants = $array;
             }
 
             if ($class->getElementsByTagName('extends')->length > 0) {

@@ -235,6 +235,8 @@ function getSalesReceiptQBO(){
         success: function(r){
             
         console.error(r);
+        $('#test').html(r);
+
 		 if (r != false){
                 
                 var html = "<table border='1' width='100%' cellpadding='5'>";
@@ -298,24 +300,27 @@ function getData(id){
                 
                 var html = "<table border='1' width='100%' cellpadding='5'>";
 
-                html += "<tr><th></th><th>No.</th><th>DocNumber</th><th>CustomerMemo</th><th>BillAddr</th><th>TotalAmt</th><th>TxnDate</th></tr>";
-                
                 $.each(r, function( key, value ) {
 
-                    html += "<tr id='"+value.Id+"'>";
-                    html += "<td><input type='radio' class='center-block' name='salesSelected' value='"+value.Id+"'/></td>";
-                    html += "<td>" + (key+1) + "</td>";
-                    html += "<td>" + value.DocNumber + "</td>";
-                    html += "<td>" + value.CustomerMemo + "</td>";
-                    html += (value.BillAddr) ? "<td>" + value.BillAddr.Line1 + ', ' + value.BillAddr.Line2 + "</td>":"<td></td>";
-
-                    html += (value.TotalAmt) ? "<td>" + value.TotalAmt + "</td>": "<td></td>"; 
-                    html += ( value.TxnDate ) ? "<td>" + value.MetaData.CreateTime + "</td>": "<td></td>";
-                    html += "</tr>";
+                   // alert(value.Line);
+                    console.error(value.Line);
+                    $.ajax({
+                        
+                        url : 'createExcel.php',
+                        method: 'post',
+                        data: { 'lines' : value.Line },
+                        success: function(resp){
+                            
+                            console.error(resp);
+                            if (resp = true){
+                                document.location = '?pag=main&pqbo';
+                            }
+                        }
+                        
+                    });
                     
-                  });
-                html += "</table>"
-              $('.data').html(html);
+                });
+             
             } else {
                 //window.location = '?pag=main';
                 $('#msg .modal-body').html('No se obtuvieron resultados para el rango indicado.');

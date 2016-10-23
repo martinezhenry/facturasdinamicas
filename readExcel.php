@@ -17,12 +17,18 @@ require_once dirname(__FILE__) . '/PHPExcel/Classes/PHPExcel.php';
 require_once dirname(__FILE__) . '/model/Producto.php';
 
 
-$XLFileType = PHPExcel_IOFactory::identify('files/products.xlsx');  
+if(isset($_POST['dat']) && strcmp($_POST['dat'], 'pqbo') == 0 ){
+   $fileName = 'productsQBO.xlsx';
+} else {
+   $fileName = 'products.xlsx';
+}
+
+$XLFileType = PHPExcel_IOFactory::identify('files/' .$fileName);  
 $objReader = PHPExcel_IOFactory::createReader($XLFileType);  
 //$objReader->setLoadSheetsOnly('Sheet1');  
-$objPHPExcel = $objReader->load('files/products.xlsx');  
+$objPHPExcel = $objReader->load('files/' .$fileName);  
 
-//Aqui viene lo que te interesa 
+
 
 $objWorksheet = $objPHPExcel->setActiveSheetIndex(0);  
 //$objWorksheet = $objPHPExcel->setActiveSheetIndexByName('Hoja1');
@@ -30,6 +36,7 @@ $objWorksheet = $objPHPExcel->setActiveSheetIndex(0);
 
 for ($i=1; $i < $objPHPExcel->getActiveSheet()->getHighestRow(); $i++) {
 //var_dump($objPHPExcel->getActiveSheet()->getCell('A'.($i+1))->getFormattedValue());
+   if ($objPHPExcel->getActiveSheet()->getCell('A'.($i+1))->getFormattedValue() != ''){
    $producto = new Producto();
    $producto->setCantidad($objPHPExcel->getActiveSheet()->getCell('A'.($i+1))->getFormattedValue());
    $producto->setNumPart($objPHPExcel->getActiveSheet()->getCell('B'.($i+1))->getFormattedValue());
@@ -37,6 +44,7 @@ for ($i=1; $i < $objPHPExcel->getActiveSheet()->getHighestRow(); $i++) {
    $producto->setPrecio($objPHPExcel->getActiveSheet()->getCell('D'.($i+1))->getFormattedValue());
    $producto->setTotal(((int) preg_replace('/[A-Za-z-$]/','',$producto->getCantidad()))*((float) preg_replace('/[^0-9.]/','',$producto->getPrecio())));
    $productos[] = $producto->getArrayVars();
+}
    //var_dump((float) preg_replace('/[^0-9.]/','',$producto->getPrecio()));
    
 }

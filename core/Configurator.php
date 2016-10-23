@@ -74,12 +74,19 @@ class Configurator implements Constants {
         $this->loadDBConfig();
     }
 
-    public function loadDBConfig() {
+    public function loadDBConfig($dataBaseConfig = NULL) {
         $configData = parse_ini_file("../config/databases.ini", true);
+        
+        if (isset($dataBaseConfig)){
+            $searchDB = $dataBaseConfig;
+        } else {
+            $searchDB = $this->getDatabase();
+        }
+        
         if (NULL != $this->getDatabase()) {
             // var_dump($configData);
             foreach ($configData as $key => $value) {
-                if (strcmp($this->getDatabase(), $key) === 0) {
+                if (strcmp($searchDB, $key) === 0) {
 
                     foreach ($value as $key => $val) {
 

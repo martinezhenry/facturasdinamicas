@@ -18,7 +18,7 @@
     // end runnable specific code snipit ##########################//
     intuit.ipp.anywhere.setup({
         menuProxy: '',
-        grantUrl: 'http://'+parser.hostname+':8080/PHPOAuthSample/oauth.php?start=t' 
+        grantUrl: 'http://'+parser.hostname+'/PHPOAuthSample/oauth.php?start=t' 
         // outside runnable you can point directly to the oauth.php page
     });
   </script>
@@ -34,6 +34,7 @@ require_once(PATH_SDK_ROOT . 'DataService/DataService.php');
 require_once(PATH_SDK_ROOT . 'PlatformService/PlatformService.php');
 require_once(PATH_SDK_ROOT . 'Utility/Configuration/ConfigurationManager.php');
 error_reporting(E_ERROR | E_PARSE);
+
 
 $tk = $_SESSION['token'];
 if(!isset($_SESSION['token'])){
@@ -75,11 +76,11 @@ if(!isset($_SESSION['token'])){
 ?>
 <script>
 function Disconnect(parameter){
-window.location.href = "http://localhost:8080/PHPOAuthSample/Disconnect.php";
+window.location.href = "http://localhost/PHPOAuthSample/Disconnect.php";
 }
 
 function Reconnect(parameter){
-window.location.href = "http://localhost:8080/PHPOAuthSample/Reconnect.php";
+window.location.href = "http://localhost/PHPOAuthSample/Reconnect.php";
 }
 </script>
 </body>

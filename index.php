@@ -28,6 +28,11 @@
         <script src="js/testGetDataQBO.js"></script>
 
 <?php } ?>
+        
+        <?php if ( isset($pag) && strcmp($pag,_PROFIT_) == 0){ ?>
+        <script src="js/profit.js"></script>
+
+<?php } ?>
     </head>
     <body>
 
@@ -54,9 +59,13 @@
             
             require_once 'views/testGetDataQBO.html'; 
             
-        }else {
+        } else if (strcmp($pag,_PROFIT_) == 0){
+            
+            require_once 'views/profit.html'; 
+            
+        } else {
              require_once 'views/main.html'; 
-        }
+        } 
         
         ?>
       

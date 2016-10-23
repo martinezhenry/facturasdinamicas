@@ -209,13 +209,8 @@ class SyncRestHandler extends RestHandler
 		$oauth->setToken($this->context->requestValidator->AccessToken, $this->context->requestValidator->AccessTokenSecret);
 		$oauth->enableDebug();
 		$oauth->setAuthType(OAUTH_AUTH_TYPE_AUTHORIZATION);
-		$oauth->enableSSLChecks();
-
-		// Disables oauth SSLChecks
-		if (!$this->context->IppConfiguration->SSLCheckStatus){
-			$oauth->disableSSLChecks();
-		}
-
+		$oauth->disableSSLChecks();
+		
 		$httpHeaders = array();
 		if ('QBO'==$this->context->serviceType ||
 			'QBD'==$this->context->serviceType)

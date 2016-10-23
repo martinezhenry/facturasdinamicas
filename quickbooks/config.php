@@ -10,7 +10,6 @@
 
 // Determine parent path for SDK
 $sdkDir = __DIR__ . DIRECTORY_SEPARATOR;
-//$sdkDir = str_replace('controller', 'quickbooks', subject)$sdkDir
 
 if (!defined('PATH_SDK_ROOT'))
 	define('PATH_SDK_ROOT', $sdkDir);
@@ -29,8 +28,18 @@ set_include_path(get_include_path() . PATH_SEPARATOR . POPO_CLASS_PATH);
 foreach (glob(POPO_CLASS_PATH.'/*.php') as $filename)
     require_once($filename);
 
+//include som
+if (!defined('POPO_CLASS_PATH_REST')) {
+    define('POPO_CLASS_PATH_REST',POPO_CLASS_PATH  . 'IntuitRestServiceDef' . DIRECTORY_SEPARATOR);
+}
 
 // Specify the prefix pre-pended to POPO class names.  If you modify this value, you
 // also need to rebuild the POPO classes, with the same prefix
 if (!defined('PHP_CLASS_PREFIX'))
-	define('PHP_CLASS_PREFIX','IPP');
+	define('PHP_CLASS_PREFIX',    'IPP');
+
+//TODO: It will be fixed in scope of SDK-229
+//It is specified and included manually to avoid double inclusion and ambiguous state 
+require_once POPO_CLASS_PATH_REST  . PHP_CLASS_PREFIX .'TaxRateDetails.php';
+require_once POPO_CLASS_PATH_REST  . PHP_CLASS_PREFIX .'TaxService.php';
+require_once POPO_CLASS_PATH_REST  . PHP_CLASS_PREFIX .'Fault.php';

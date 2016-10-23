@@ -74,21 +74,7 @@ class LocalConfigReader
 			                                                 $xmlObj->intuit->ipp->security->oauth->attributes()->consumerKey
 			                                                 );
 		}
-
-        // Get value for SSL Check
-        if ($xmlObj &&
-            $xmlObj->intuit &&
-            $xmlObj->intuit->ipp &&
-            $xmlObj->intuit->ipp->security &&
-            $xmlObj->intuit->ipp->security->OAuthSSL &&
-            $xmlObj->intuit->ipp->security->OAuthSSL->attributes())
-        {
-            // SSLCheckStatus
-            $SSLCheckFlag = strtolower(trim($xmlObj->intuit->ipp->security->OAuthSSL->attributes()->check));
-            $ippConfig->SSLCheckStatus = ($SSLCheckFlag === "false") ? false : true;
-
-        }
-
+		
 		// Initialize Request Configuration Object
 		$ippConfig->Message = new Message();
 		$ippConfig->Message->Request = new Request();

@@ -5,6 +5,9 @@ require_once(PATH_SDK_ROOT . 'Core/ContentWriter.php');
 require_once(PATH_SDK_ROOT . 'Core/OperationControlList.php');
 require_once(PATH_SDK_ROOT . 'DataService/Batch.php');
 require_once(PATH_SDK_ROOT . 'DataService/IntuitCDCResponse.php');
+require_once(POPO_CLASS_PATH . 'IntuitRestServiceDef/IPPAttachableResponse.php');
+require_once(POPO_CLASS_PATH . 'IntuitRestServiceDef/IPPFault.php');
+require_once(POPO_CLASS_PATH . 'IntuitRestServiceDef/IPPError.php');
 
 /**
  * This file contains DataService performs CRUD operations on IPP REST APIs.

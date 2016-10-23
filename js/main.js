@@ -41,16 +41,16 @@ function getListCompanies(id) {
 }
 
 
-function refreshProducts() {
+function refreshProducts(dat) {
     
-
+    //alert(dat);
     $.ajax({
         url: 'readExcel.php',
         type: 'POST',
-        data: {},
+        data: {'dat' : dat},
         dataType: 'json',
         success: function (r) {
-            console.log(r);
+            console.error(r);
             if (r != false) {
 
                 var html = "";
@@ -60,21 +60,21 @@ function refreshProducts() {
                // var impuesto = parseInt($('#impuesto-txt').val());
                // var descuento = parseFloat($('#descuento-txt').val());
                var impuesto =0, descuento=0.0;
-                console.log(descuento);
-                console.log(impuesto);
+         //       console.log(descuento);
+           //     console.log(impuesto);
                 var montoDescuento = 0.0;
 
                 $.each(r, function (key, value) {
                     count = count + 1;
                     subTotal = (parseFloat(subTotal) + parseFloat((value.total).replace(',', '')));
-                    console.log(subTotal);
+             //       console.log(subTotal);
                     html += "<tr >";
                     html += "<td>" + (key + 1) + "</td>";
                     html += "<td>" + value.cant + "</td>";
                     html += "<td>" + value.numPart + "</td>";
                     html += "<td>" + value.desc + "</td>";
 
-                    html += "<td class='"+value.prec+"'> <input class='form-control edit-edit-price' type='text' value='$"+ (value.prec).replace(new RegExp(/[^0-9.]/,'g'),'') +"'</td>";
+                    html += "<td class='"+value.prec+"'> <input class='form-control edit-edit-price' type='text' value='$"+ (value.prec).replace(new RegExp(/[^0-9.]/g),'') +"'</td>";
                     html += "<td>$" + value.total + "</td>";
                     // html += "<td><a class='edit icon'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a><a class='delete'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></td>";
                     html += "</tr>";
@@ -91,10 +91,42 @@ function refreshProducts() {
 
     }).fail(function(r){
         
-        console.log(r);
+        console.error(r);
     });
 
 }
+
+
+function _GET(param)
+{
+/* Obtener la url completa */
+url = document.URL;
+/* Buscar a partir del signo de interrogación ? */
+url = String(url.match(/\?+.+/));
+/* limpiar la cadena quitándole el signo ? */
+url = url.replace("?", "");
+/* Crear un array con parametro=valor */
+url = url.split("&");
+
+/* 
+Recorrer el array url
+obtener el valor y dividirlo en dos partes a través del signo = 
+0 = parametro
+1 = valor
+Si el parámetro existe devolver su valor
+*/
+x = 0;
+while (x < url.length)
+{
+p = url[x].split("=");
+if (p[0] == param)
+{
+return decodeURIComponent(p[1]);
+}
+x++;
+}
+}
+
 
 
 Number.prototype.formatMoney = function (c, d, t) {
@@ -134,7 +166,7 @@ function loadFile(event) {
             {
                 // Success so call function to process the form
                 $('#infile').filestyle('clear');
-                refreshProducts();
+                refreshProducts('p');
             }
             else
             {
@@ -172,9 +204,9 @@ console.log($('#emp-box').val());
         pedido.sub_total = $('#sub-total-txt').val();
         pedido.sale_tax = 0;
         pedido.discount = 0;
-        pedido.freight = $('#entrega-txt').val().replace(new RegExp(/[^0-9.]/,'g'),'');
+        pedido.freight = $('#entrega-txt').val().replace(new RegExp(/[^0-9.]/g),'');
         pedido.handling = 0;
-        pedido.restocking = $('#repo-txt').val().replace(new RegExp(/[^0-9.]/,'g'),'');
+        pedido.restocking = $('#repo-txt').val().replace(new RegExp(/[^0-9.]/g),'');
         pedido.total_sale = $('#total-txt').val();
         pedido.detalle = [];
         var detalle = new Object();
@@ -298,8 +330,8 @@ function calculateTotal(){
     //var impuesto = parseInt($('#impuesto-txt').val());
     //var descuento = parseFloat($('#descuento-txt').val().replace(',',''));
     //var carga = parseFloat($('#carga-txt').val().replace(',',''));
-    var entrega = (($('#entrega-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
-    var insurance = (($('#repo-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
+    var entrega = (($('#entrega-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/g), ''));
+    var insurance = (($('#repo-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/g), ''));
 
     
     console.log(entrega);
@@ -321,7 +353,7 @@ function calculateTotal(){
     var descuento = 0.0, carga=0.0;
     var impuesto = 0;
     var montoDescuento = 0.0, final = 0.0;
-    var subTotal =parseFloat(($('#sub-total-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
+    var subTotal =parseFloat(($('#sub-total-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/g), ''));
     montoDescuento = parseFloat(subTotal - descuento);
     final = montoDescuento + carga + entrega + insurance
     $('#total-txt').val('$'+(final + parseFloat((final * impuesto) / 100)).formatMoney(2, '.', ','));
@@ -332,7 +364,7 @@ function calculateTotal(){
 function aplicateDiscount(){
     
     
-    var porcentaje = parseInt(($('#porc-desc-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
+    var porcentaje = parseInt(($('#porc-desc-txt').val().replace(',','')).replace(new RegExp(/[^0-9.]/g), ''));
     var subTotal = 0.0;
     var valor;
     var valorFinal;
@@ -351,8 +383,8 @@ function aplicateDiscount(){
                     
                     //console.log(subTotal);
                     //console.log($(this).children('td').eq(4).text() + "----");
-                    cantidad = ($(this).children('td').eq(1).text()).replace(new RegExp(/[^0-9.]/,'g'), '');
-                    producto = parseFloat((($(this).children('td').eq(4).attr('class')).replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
+                    cantidad = ($(this).children('td').eq(1).text()).replace(new RegExp(/[^0-9.]/g), '');
+                    producto = parseFloat((($(this).children('td').eq(4).attr('class')).replace(',','')).replace(new RegExp(/[^0-9.]/g), ''));
                     valor = cantidad * producto;
                     //valor = valor.replace(',','');
                     //valor = valor.replace(/[^0-9.]/, '');
@@ -377,6 +409,8 @@ function aplicateDiscount(){
          
                    // $('#products tbody').html(html);
                   //  $('#details-products').val(count);
+
+
                    $(this).children('td').eq(4).find('input').val('$'+parseFloat(producto).formatMoney(2, '.', ','));
                    $(this).children('td').eq(5).text('$'+valorFinal.formatMoney(2, '.', ','));
 
@@ -412,13 +446,13 @@ function calculateSubtotal(){
                     
                     //console.log(subTotal);
                     //console.log($(this).children('td').eq(4).text() + "----");
-                    cantidad = parseInt(($(this).children('td').eq(1).text()).replace(new RegExp(/[^0-9.]/,'g'), ''));
-                    producto = parseFloat((($(this).children('td').eq(4).find('input').val()).replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), ''));
+                    cantidad = parseInt(($(this).children('td').eq(1).text()).replace(new RegExp(/[^0-9.]/g), ''));
+                    producto = parseFloat((($(this).children('td').eq(4).find('input').val()).replace(',','')).replace(new RegExp(/[^0-9.]/g), ''));
                     valor = cantidad * producto;
                     //valor = valor.replace(',','');
                     //valor = valor.replace(/[^0-9.]/, '');
                     //console.log(valor);
-                      valorFinal= (($(this).children('td').eq(5).text()).replace(',','')).replace(new RegExp(/[^0-9.]/,'g'), '');
+                      valorFinal= (($(this).children('td').eq(5).text()).replace(',','')).replace(new RegExp(/[^0-9.]/g), '');
                 subTotal = (parseFloat(subTotal) + parseFloat((valorFinal)));
                 
          
@@ -446,6 +480,16 @@ $(document).ready(function () {
 
 //var editActivated = false;
 
+    var dat = 0;
+    dat = _GET('pqbo');    
+    //console.error(dat);
+    
+    if (dat == 1){
+       // alert('entra');
+       // $('#infile').attr('disabled');
+        refreshProducts('pqbo');
+        $('#exportar-file').css("display", "block");
+    }
 
 
     $('body').on('click', '.edit', function () {
@@ -515,13 +559,13 @@ $(document).ready(function () {
 
     $('body').on('keyup', '#products tbody tr .edit-edit-price',function(){
        console.log('recalcule-price-edit');
-       var producto = parseFloat(($(this).val()).replace(',','').replace(new RegExp(/[^0-9.]/,'g'), ''));
+       var producto = parseFloat(($(this).val()).replace(',','').replace(new RegExp(/[^0-9.]/g), ''));
        console.log(producto);
-       if (($(this).val()).replace(',','').replace(new RegExp(/[^0-9.]/,'g'), '') == ""){
+       if (($(this).val()).replace(',','').replace(new RegExp(/[^0-9.]/g), '') == ""){
     producto =0.0;
 }
 
-       var cantidad = parseInt(($(this).parent().siblings().eq(1).text()).replace(new RegExp(/[^0-9.]/,'g'), ''));
+       var cantidad = parseInt(($(this).parent().siblings().eq(1).text()).replace(new RegExp(/[^0-9.]/g), ''));
        console.log(cantidad);
 
        var final = (cantidad * producto);
