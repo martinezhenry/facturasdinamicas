@@ -118,7 +118,7 @@ function getDetail($id = NULL, $from = NULL, $to = NULL) {
 
     $serverName = DBManagement::getInstance()->getHost(); //serverName\instanceName
     $connectionInfo = array( "Database"=>DBManagement::getInstance()->getDbName(), "UID"=>DBManagement::getInstance()->getUser(), "PWD"=>DBManagement::getInstance()->getPass(), "CharacterSet" => "UTF-8");
-    
+    $conn = sqlsrv_connect( $serverName, $connectionInfo);
         if( $conn === false ) {
          die( print_r( sqlsrv_errors(), true));
     }
