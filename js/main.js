@@ -43,7 +43,7 @@ function getListCompanies(id) {
 
 function refreshProducts(dat) {
     
-    alert(dat);
+    //alert(dat);
     $.ajax({
         url: 'readExcel.php',
         type: 'POST',
